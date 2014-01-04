@@ -1,0 +1,218 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,107.1429,71.4286)
+  Text = ("Редактор юнитов")
+  Resizable = False
+  { PictureBody PictureBox
+    MoveScaled(34,0,36.5714,36.5714)
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { TextBoxLimb1 TextBox
+    MoveScaled(16,43,27.1429,3)
+    Text = ("Лапа 1")
+    ReadOnly = True
+  }
+  { ButtonLimb1 Button
+    MoveScaled(43,43,8.5714,3)
+    Text = ("выбор")
+  }
+  { ButtonLimb2 Button
+    MoveScaled(80,43,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb2 TextBox
+    MoveScaled(53,43,27.1429,3)
+    Text = ("Лапа 2")
+    ReadOnly = True
+  }
+  { ButtonLimb3 Button
+    MoveScaled(43,47,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb3 TextBox
+    MoveScaled(16,47,27.1429,3)
+    Text = ("Лапа 3")
+    ReadOnly = True
+  }
+  { ButtonLimb4 Button
+    MoveScaled(80,47,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb4 TextBox
+    MoveScaled(53,47,27.1429,3)
+    Text = ("Лапа 4")
+    ReadOnly = True
+  }
+  { ButtonLimb5 Button
+    MoveScaled(43,51,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb5 TextBox
+    MoveScaled(16,51,27.1429,3)
+    Text = ("Лапа 5")
+    ReadOnly = True
+  }
+  { ButtonLimb6 Button
+    MoveScaled(80,51,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb6 TextBox
+    MoveScaled(53,51,27.1429,3)
+    Text = ("Лапа 6")
+    ReadOnly = True
+  }
+  { ButtonLimb7 Button
+    MoveScaled(43,55,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb7 TextBox
+    MoveScaled(16,55,27.1429,3)
+    Text = ("Лапа 7")
+    ReadOnly = True
+  }
+  { ButtonLimb8 Button
+    MoveScaled(80,55,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb8 TextBox
+    MoveScaled(53,55,27.1429,3)
+    Text = ("Лапа 8")
+    ReadOnly = True
+  }
+  { ButtonLimb9 Button
+    MoveScaled(80,38,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb9 TextBox
+    MoveScaled(53,38,27.1429,3)
+    Text = ("хвост")
+    ReadOnly = True
+  }
+  { ButtonLimb0 Button
+    MoveScaled(43,38,8.5714,3)
+    Text = ("выбор")
+  }
+  { TextBoxLimb0 TextBox
+    MoveScaled(16,38,27.1429,3)
+    Text = ("голова")
+    ReadOnly = True
+  }
+  { PictureLimb1 PictureBox
+    MoveScaled(41,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb2 PictureBox
+    MoveScaled(41,28,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb3 PictureBox
+    MoveScaled(47,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb4 PictureBox
+    MoveScaled(47,28,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb5 PictureBox
+    MoveScaled(53,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb6 PictureBox
+    MoveScaled(53,28,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb7 PictureBox
+    MoveScaled(59,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb8 PictureBox
+    MoveScaled(59,28,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb9 PictureBox
+    MoveScaled(65,16,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb0 PictureBox
+    MoveScaled(36,16,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { Separator1 Separator
+    MoveScaled(0,41,107,2)
+  }
+  { Separator2 Separator
+    MoveScaled(0,36,107,2)
+  }
+  { ButtonTest Button
+    MoveScaled(31,59,10,6)
+    Text = ("Test")
+  }
+  { ButtonNewMorfid Button
+    MoveScaled(1,1,24,4)
+    Text = ("Новый морфид")
+  }
+  { ButtonLoadMorfid Button
+    MoveScaled(1,6,24,4)
+    Text = ("Загрузить морфида")
+  }
+  { ButtonSaveMorfid Button
+    MoveScaled(1,11,24,4)
+    Text = ("Сохранить морфида")
+  }
+  { ButtonTest2 Button
+    MoveScaled(42,59,10,6)
+    Text = ("Test2")
+  }
+  { ButtonTest3 Button
+    MoveScaled(53,59,10,6)
+    Text = ("Test3")
+  }
+  { ButtonTest4 Button
+    MoveScaled(64,59,10,6)
+    Text = ("Test4")
+  }
+  { PictureUnit PictureBox
+    MoveScaled(27,3,5,5)
+    Visible = False
+    Picture = Picture["file-types/unit-type.file.png"]
+    Border = Border.Plain
+  }
+  { PicturePartUnit PictureBox
+    MoveScaled(27,9,5,5)
+    Visible = False
+    Picture = Picture["file-types/part-unit-type.file.png"]
+    Border = Border.Plain
+  }
+  { ButtonSaveAsMorfid Button
+    MoveScaled(1,16,24,4)
+    Text = ("Сохранить как...")
+  }
+  { PictureBlankUnit PictureBox
+    MoveScaled(27,15,5,5)
+    Visible = False
+    Picture = Picture["file-types/blank-unit-type.file.png"]
+    Border = Border.Plain
+  }
+}

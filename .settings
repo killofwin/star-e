@@ -1,0 +1,17 @@
+[Breakpoints]
+Count=0
+
+[DebugWindow]
+Count=0
+
+[DebugWindow/sa2]
+Geometry=[0,0,210,210]
+
+[OpenFile]
+Active=1
+File[1]=".src/editor-2d/Editor2D.class:268.6"
+Count=1
+
+[Watches]
+Count=0
+

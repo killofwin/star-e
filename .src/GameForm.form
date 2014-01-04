@@ -1,0 +1,17 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,112.8571,78.5714)
+  Text = ("Игра")
+  Resizable = False
+  { DrawA DrawingArea
+    MoveScaled(11,0,100.5714,73.1429)
+    Mouse = Mouse.Cross
+    Border = Border.Plain
+  }
+  { SelectHero PictureBox
+    MoveScaled(1,1,9.1429,9.1429)
+    Picture = Picture["DHero.png"]
+    Stretch = True
+  }
+}

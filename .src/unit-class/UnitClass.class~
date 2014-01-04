@@ -1,0 +1,218 @@
+' Gambas class file
+
+  Public Speed As Integer ' скорость
+  Public Parts As New PartUnitClass[] ' конечности лапы
+  '1-8 лапы    9 голова     10 хвост
+  
+  Public TypeUnit As String ' наименование юнита
+  
+  Public OtherValues As New GroupUniversalValues ' дополнительные признаки юнита
+  
+  Public Tactics As Integer ' используемая тактика, нападать строем, нападать бегом, отойти подальше, 
+  Public Formation As Integer ' где в строю идти, арьергард, авангард, правый фланг, левый фланг, охрана героя
+  
+  Public Group As Integer ' группа в которую входит юнит
+  
+  Public X As Integer
+  Public Y As Integer ' координаты
+  Public Z As Integer
+  
+  Public Writ As Integer ' текущий приказ
+  Public WritTarget As Integer ' цель приказа
+  Public WritX As Integer
+  Public WritY As Integer ' координаты точки назначения из приказа, если равны нулю или достигнутым, то происходит новый расчёт
+  Public WritZ As Integer
+  
+  'Public Sub _new()
+  ' Dim p As New PartUnitClass
+  ' Limb.Add(p) 
+  'End
+
+Public Function SaveClass() As String[]
+  ' Сохраняет класс в виде массива строк
+  Dim rData As New String[] ' массив для результата
+  Dim a As Integer ' счётчик цикла
+  Dim m As Integer ' ограничитель цикла
+  
+  Dim aParts As Integer
+  Dim mParts As Integer ' для перебора частей
+  Dim oValues As String[] ' дополнительные свойства объекта
+  Dim PartData As String[] ' ссылка для массива с сохранением части
+  
+  
+  rData.Add("begin unit") ' начало описания
+  
+  'сохранение основных свойств
+  rData.Add("speed=" & LTrim(Str(Speed))) 'Speed
+  rData.Add("type-unit=" & TypeUnit) 'TypeUnit
+  rData.Add("tactics=" & LTrim(Str(Tactics))) 'Tactics
+  rData.Add("formation=" & LTrim(Str(Formation))) 'Formation
+  rData.Add("group=" & LTrim(Str(Group))) 'Group
+  rData.Add("x=" & LTrim(Str(X))) ' X
+  rData.Add("y=" & LTrim(Str(Y))) ' Y
+  rData.Add("z=" & LTrim(Str(Z))) ' Z
+  rData.Add("writ=" & LTrim(Str(Writ))) 'Writ
+  rData.Add("writ-target=" & LTrim(Str(WritTarget))) 'WritTarget
+  rData.Add("writ-x=" & LTrim(Str(WritX))) ' WritX
+  rData.Add("writ-y=" & LTrim(Str(WritY))) ' WritY
+  rData.Add("writ-z=" & LTrim(Str(WritZ))) ' WritZ  
+  'rData.Add("=" & LTrim(Str())) '
+  
+  ' Сохранение дополнительных признаков юнита
+  rData.Add("begin other-values")
+  If OtherValues.Count > 0 Then
+    'есть дополнительные свойства
+    oValues = OtherValues.SaveClass() ' получение массива строк с дополнительными свойствами юнита.
+    m = oValues.Max
+    For a = 0 To m
+     rData.Add(oValues[a]) 
+    Next
+  Endif
+  rData.Add("end other-values")
+   
+  ' Сохранение частей юнита 
+  If Parts.Count = 0 Then
+    ' частей и у юнита нет
+    rData.Add("unit no-parts") ' У юнита нет частей
+  Endif
+  If Parts.Count > 0 Then
+    ' У юнита есть части
+    rData.Add("unit parts")  
+    mParts = Parts.Max ' колличество частей
+    For aParts = 0 To mParts
+      PartData = Null ' очистка ссылки на массив
+      PartData = Parts[aParts].SaveClass() ' сохранение части в массив
+      m = PartData.Max
+      rData.Add("unit begin-part") ' начало описания части
+      For a = 0 To m
+        rData.Add(PartData[a])    'добавление строк части в массив
+      Next
+      rData.Add("unit end-part") ' конец описания части
+    Next
+        
+  Endif
+  rData.Add("end unit") ' конец описания
+  Return rData ' возврат значения
+End
+
+Public Sub LoadClass(ByRef ArrayData As String[], Optional StartScan As Integer = 0, Optional StopScan As Integer = -1)
+  ' Функция загружающая данные в класс из массива строк 
+  ' Так же принимает начало и конец сканирования
+  Dim a As Integer 
+  Dim m As Integer
+  Dim Stage As Integer
+  Dim sData As New ClassStringData ' класс для операций со строковыми переменными
+  Dim S As String ' текущая строка
+  Dim OP As String ' оператор
+  Dim Value As String ' значение
+  
+  Dim BeginOtherValues As Integer ' строка начала описания лрполнительных свойств
+  Dim EndOtherValues As Integer ' строка окончания описания дополнительных свойств 
+  Dim oValues As String[] ' ссылка на массив для дополнительных свойств
+  
+  Dim BeginPart As Integer ' начало описания части
+  Dim EndPart As Integer ' конец описания части
+  Dim PartIndex As Integer ' текущая часть
+  Dim PartTMP As PartUnitClass ' временная переменная под текущую часть юнита
+  
+  If ArrayData = Null Then Return ' вместо массива переданна пустая переменная
+  If ArrayData.Count = 0 Then Return ' Если в массиве нет элементов, то выйти
+  
+  m = StopScan
+  If StopScan = -1 Then m = ArrayData.Max ' значение по умолчанию
+  For a = StartScan To m
+    S = ArrayData[a] ' текущая строка
+    'перебор нужной части массива
+    If Stage = 0 Then
+      ' чтение базовых параметров класса
+      OP = sData.GetOpS(S) ' извлечение оператора
+      Value = sData.GetValueS(S) ' извлечение значения
+      
+      If OP = "speed" Then Speed = Val(Value) '  rData.Add("speed=" & LTrim(Str(Speed))) 'Speed
+      If OP = "type-unit" Then TypeUnit = Value
+      If OP = "tactics" Then Tactics = Val(Value) ' rData.Add("tactics=" & LTrim(Str(Tactics))) 'Tactics
+      If OP = "formation" Then Formation = Val(Value) ' rData.Add("formation=" & LTrim(Str(Formation))) 'Formation
+      If OP = "group" Then Group = Val(Value) ' rData.Add("group=" & LTrim(Str(Group))) 'Group
+      If OP = "x" Then X = Val(Value) ' rData.Add("x=" & LTrim(Str(X))) ' X
+      If OP = "y" Then Y = Val(Value) ' rData.Add("y=" & LTrim(Str(Y))) ' Y
+      If OP = "z" Then Z = Val(Value) ' rData.Add("z=" & LTrim(Str(Z))) ' Z
+      If OP = "writ" Then Writ = Val(Value) ' rData.Add("writ=" & LTrim(Str(Writ))) 'Writ
+      If OP = "writ-target" Then WritTarget = Val(Value) ' rData.Add("writ-target=" & LTrim(Str(WritTarget))) 'WritTarget
+      If OP = "writ-x" Then WritX = Val(Value) ' rData.Add("writ-x=" & LTrim(Str(WritX))) ' WritX
+      If OP = "writ-y" Then WritY = Val(Value) ' rData.Add("writ-y=" & LTrim(Str(WritY))) ' WritY
+      If OP = "writ-z" Then WritZ = Val(Value) ' rData.Add("writ-z=" & LTrim(Str(WritZ))) ' WritZ  
+      
+      If OP = "begin other-values" Then Stage = 1 ' начались дополнительные свойства
+      
+    Endif
+    If Stage = 1 Then
+      'Print "---"
+      ' считывание дополнительных свойств
+      If sData.GetOpS(S) = "begin other-values" Then BeginOtherValues = a ' начало описания дополнительных свойств
+      EndOtherValues = sData.FindStringIndex(ArrayData, "end other-values", BeginOtherValues, m) ' поиск окончания описания дополнительных типов
+      'Print EndOtherValues
+      oValues = sData.CopyStringArray(ArrayData, BeginOtherValues, EndOtherValues) ' копирование нужного куска в другой массив
+      OtherValues.LoadClass(oValues) ' загрузка массива дополнительных свойств
+      Stage = 2 ' Стадия окончена
+      a = EndOtherValues ' передвинуть счётчик что бы не просматривал уже загруженные данные
+      Print m
+      Print BeginOtherValues
+      Print EndOtherValues
+    Endif
+    If Stage = 2 Then
+      ' Стадия 2 Загрузка частей юнита
+      If sData.GetOpS(S) = "unit no-parts" Then
+        Stage = 4 ' У юнита нет частей, стадия 4
+      Endif
+      If sData.GetOpS(S) = "unit parts" Then
+        ' У юнита есть части
+        Stage = 3 
+      Endif
+       
+    Endif
+    If Stage > 2 Then Break ' Если уже не вторая стадия, прервать цикл 
+    ' Довольно быдлокодское решение, но я сегодня явно не в форме.
+    ' Я решил сократить данный цикл что бы этот быдлокод минимально влиял на выполнение программы.
+    ' Думаю Стадию 1 стоит переписать в дальнейшем и вынести за пределы цикла.
+    
+  Next
+  Parts.Clear ' очистка массива с частями
+  
+  If Stage = 3 Then
+    ' добавление частей
+    a = EndOtherValues + 1 ' начинаем считать с конца описания дополнительных свойств
+    m = sData.FindStringIndex(ArrayData, "end unit", a, m) ' поиск конца описания класса в массиве
+    If m = -1 Then m = StopScan
+    If m = -1 Then m = ArrayData.Max ' защита от дурака который не внесёт в файл "end unit"
+    
+    
+      
+    Do
+      S = ArrayData[a]
+      If sData.GetOpS(S) = "unit begin-part" Then
+        BeginPart = sData.FindStringIndex(ArrayData, "unit begin-part", a, m) ' поиск начала текущей части
+        EndPart = sData.FindStringIndex(ArrayData, "unit end-part", a, m) ' поиск конца текущей части
+        'Как это работает... Я только что написал и уже забыл.
+        'Вообще это оптимизация, я так рассудил что лучше установку переменных BeginPart и EndPart
+        'Проводить только при нахождении строки "unit begin-part" . А всякий мусор между "unit end-part" и "unit begin-part"
+        'Не рассматривать, всё равно там могут быть разве что комментарии
+      Endif  
+      
+      ' Здесь могло бы быть рассмотрение того что находиться между "unit end-part" и "unit begin-part"
+      
+      If BeginPart <> -1 And EndPart <> -1 Then
+        ' часть найдена
+        PartTMP = Null ' обнулить на всякий случай
+        PartTMP = New PartUnitClass ' создать новую часть для юнита
+        PartTMP.LoadClass(ArrayData, BeginPart, EndPart) ' загрузить часть во временную переменную
+        Parts.Add(PartTMP) ' добавить часть в массив
+        a = EndPart ' передвинуть счётчик
+        BeginPart = -1 ' Знаю быдлокод
+        EndPart = -1 ' Это устанавливает значения в такое положение дабы операция не повторилась ещё раз до установки BeginPart и EndPart
+      Endif
+      a = a + 1 ' увеличить счётчик на 1
+    Loop Until a > m ' выйти из цикла если счётчик больше ограничителя
+  Endif
+  
+  
+End

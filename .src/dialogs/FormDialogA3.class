@@ -1,0 +1,111 @@
+' Gambas class file
+
+Private SelectAnswer As Integer ' выбранный вариант ответа
+
+Public Sub Form_Open()
+  Me.Center ' расположить по центру
+End
+
+Public Function Question(TextQuestion As String, Optional TitleQuestion As String = "Question", Optional Answer0 As String = "OK", Optional Answer1 As String = "Cancel", Optional Answer2 As String = "", Optional DefaultOK As Integer = 0, Optional DefaultCancel As Integer = 1, Optional PictureQuestion As Picture = Null) As Integer                                      
+  ' Функция принимает текст вопроса, заголовок окна, 3 (0-2) возможных ответа, кнопки реагирующие на клавиши (ESC и Enter) и картинку 
+  ' Возвращает номер выбранного ответа или -1 если окно было закрыто 
+  Dim a As Integer
+  Dim m As Integer
+  Dim r As Integer
+  Dim Answer As String[]
+  Dim MaxQuestionHeight As Integer
+  
+  Me.Text = TitleQuestion ' заголовок окна
+  TextQuestionLabel.Text = TextQuestion ' текст вопроса
+  
+  ' Ответы
+  If Len(Answer0) > 0 Then
+    ' 0 вариант ответа
+    AnswerButton0.Text = Answer0 ' вывести вариант ответа
+    AnswerButton0.Visible = True ' сделать видимым
+    If DefaultOK = 0 Then AnswerButton0.Default = True
+    If DefaultCancel = 0 Then AnswerButton0.Cancel = True
+  Endif
+  If Len(Answer1) > 0 Then
+    ' 1 вариант ответа
+    AnswerButton1.Text = Answer1 ' вывести вариант ответа
+    AnswerButton1.Visible = True ' сделать видимым
+    If DefaultOK = 1 Then AnswerButton1.Default = True
+    If DefaultCancel = 1 Then AnswerButton1.Cancel = True
+  Endif
+  If Len(Answer2) > 0 Then
+    ' 2 вариант ответа
+    AnswerButton2.Text = Answer2 ' вывести вариант ответа
+    AnswerButton2.Visible = True ' сделать видимым
+    If DefaultOK = 2 Then AnswerButton2.Default = True
+    If DefaultCancel = 2 Then AnswerButton2.Cancel = True
+  Endif
+  
+  
+  
+  SelectAnswer = -1 ' ничего не выбрано и форма закрыта
+    
+  
+  If PictureQuestion = Null Then
+   QuestionPicture.Visible = False ' убрать картинку если не переданна
+   QuestionPicture.Height = 0
+   QuestionPicture.Width = 0
+  Else 
+    QuestionPicture.Picture = PictureQuestion ' Установить нужную картинку если переданна
+  Endif
+  
+  Me.Width = TextQuestionLabel.Width ' ширина вопроса
+  
+  
+  MaxQuestionHeight = TextQuestionLabel.Height ' максимальная высота вопроса
+  
+  If QuestionPicture.Visible Then
+    Me.Width = TextQuestionLabel.Width + QuestionPicture.Width
+    'SplitQuestion.Height = QuestionPicture.Height
+    'Me.Height = 
+  Endif
+  
+  If QuestionPicture.Height > MaxQuestionHeight Then MaxQuestionHeight = QuestionPicture.Height ' если картинка выше вопроса
+  
+  Me.Height = MaxQuestionHeight + SplitAnswer.Height + 4 ' подогнать форму под высоту вопроса
+  
+  
+  Me.ShowModal
+  r = SelectAnswer
+  Return r ' возврат результата
+End
+
+Public Sub Form_Resize()
+  ' размеры формы изменены
+  SplitQuestion.Width = Me.Width - QuestionPicture.Width
+  
+  
+  SplitAnswer.Width = Me.Width ' Ширина  
+    
+  SplitQuestion.X = QuestionPicture.Width ' Здесь вопрос выстраиваеться справа от картинки
+  
+  SplitQuestion.Height = Me.Height - SplitAnswer.Height - 4 ' подогнать высоту вопроса
+  
+  SplitAnswer.Y = SplitQuestion.Y + SplitQuestion.Height + 4 ' подогнать расположение ответов
+  
+  If Me.Width < SplitAnswer.Width Then
+    ' ответы не влезают на форму
+    Me.Width = SplitAnswer.Width 
+  Endif
+  
+  
+End
+
+
+Public Sub AnswerButton0_Click()
+  SelectAnswer = 0
+  Me.Close
+End
+Public Sub AnswerButton1_Click()
+  SelectAnswer = 1
+  Me.Close
+End
+Public Sub AnswerButton2_Click()
+  SelectAnswer = 2
+  Me.Close
+End

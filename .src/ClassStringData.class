@@ -1,0 +1,94 @@
+' Gambas class file
+
+' ClassStringData
+' Класс содержит функции нужные для разделения строк на параметр=значение
+' По сути он дублирует модуль ModuleStringData 
+' А сделанно всё так из за герметичности классов, они не допускают использование и вызов функций из обычных модулей
+' инкапсуляция же. FUCK!FUCK!FUCK!FUCK!FUCK!FUCK!FUCK!FUCK!
+
+
+Public Function GetOpS(S As String) As String
+  'процедура возвращает оператор
+  'процедура настроена на символ = в качестве разделителя
+  Dim l As Integer ' длинна строки
+  Dim a As Integer ' счётчик цикла
+  Dim Op As String ' оператор
+  
+  l = Len(S)
+  
+  If l > 0 Then
+    'строка не пустая
+    For a = 1 To l
+      'цикл же
+      If Mid(S, a, 1) = "=" Then Break ' досрочный выход из цикла по причине нахождения разделителя
+      Op = Op & Mid(S, a, 1) ' наращивание по одному символу
+    Next
+   Endif
+   Return Op 'возврат значения
+       
+End
+Public Function GetValueS(S As String) As String
+  'процедура возвращает значение находящиеся после оператора, если оно конечно есть
+  'в любом другом случае возвращает пустое значение
+  Dim l As Integer ' длинна строки
+  Dim a As Integer ' счётчик цикла
+  Dim Value As String ' значение  
+  Dim v As Boolean ' началось ли значение
+  
+  l = Len(s)
+  
+  If l > 2 Then
+    'тут есть значение, хотя оператора может и не быть :) минимум для оператора и значения это 3
+    'это не баг, это фича
+    For a = 1 To l
+     If v Then
+      'значение началось
+      Value = Value & Mid(s, a, 1) ' заполняем значение
+     End If  
+     If v = False Then
+      'значение ещё не началось
+      If Mid(S, a, 1) = "=" Then v = True ' значение начинаеться
+     End If
+     'именно такой порядок проверки условий нужен что бы в значение не попал разделитель "="
+    Next
+  Endif
+  Return Value 'возврат значения
+End
+
+Public Function CopyStringArray(SourceArray As String[], Optional StartIndex As Integer = 0, Optional StopIndex As Integer = -1) As String[]
+  ' Функция копирует один одномерный строковый массив в другой, при этом используеться необязательные параметры границ копирования
+  Dim a As Integer ' счётчик цикла
+  Dim EndCopy As Integer ' окончание копирования
+  Dim StartCopy As Integer ' начало копирования
+  Dim rData As New String[] ' возвращаемый массив для результата
+  
+  EndCopy = StopIndex
+  StartCopy = StartIndex ' кэширование значений  
+  If EndCopy = -1 Then EndCopy = SourceArray.Max ' обработка значения "по умолчанию"
+  
+  For a = StartCopy To EndCopy
+    'цикл копирующий массив
+    rData.Add(SourceArray[a])
+  Next
+  Return rData ' возвратить получившийся массив  
+End
+
+Public Function FindStringIndex(StringArray As String[], S As String, Optional StartScan As Integer = 0, Optional StopScan As Integer = -1) As Integer
+  'Функция ищет в массиве нужную строку и возвращает её индекс в массиве
+  Dim a As Integer ' счётчик цикла
+  Dim m As Integer ' ограничитель счётчика
+  Dim e As Boolean ' досрочный выход из цикла
+  Dim r As Integer ' результат
+  m = StringArray.Max
+  If StopScan <> -1 Then m = StopScan
+  If StringArray.Count = 0 Then e = True ' досрочный выход если в массив пуст
+  For a = StartScan To m
+    If e Then Break
+    If StringArray[a] = S Then
+      'строка найдена
+      r = a
+      e = True 
+    Endif
+  Next
+  Return r
+End

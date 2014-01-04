@@ -1,0 +1,100 @@
+begin unit
+speed=0
+type-unit=
+tactics=0
+formation=0
+group=0
+x=0
+y=0
+z=0
+writ=0
+writ-target=0
+writ-x=0
+writ-y=0
+writ-z=0
+begin other-values
+begin universal-values
+name=
+id=0
+next value
+
+'= Описание юнита для 2D редактора морфид
+name=
+id=10002
+value-godc=
+begin game-object-data
+
+'= Название юнита
+add-string=Тестовый юнит
+
+add-string=
+add-string=
+add-string=
+
+'= Имя файла с картинкой для редактора
+add-string=pictures/test/test-model-1/body-test-model-1.png
+
+'= Описание юнита
+add-string= Обычное описание юнита
+
+
+add-integer=0
+
+'= Крепление конечности координаты XYZ (0 голова)
+add-integer=25
+add-integer=193
+add-integer=0
+
+'= Крепление конечности координаты XYZ (1 лапа)
+add-integer=59
+add-integer=207
+add-integer=0
+
+'= Крепление конечности координаты XYZ (2 лапа)
+add-integer=59
+add-integer=207
+add-integer=0
+
+'= Крепление конечности координаты XYZ (3 лапа)
+add-integer=99
+add-integer=211
+add-integer=0
+
+'= Крепление конечности координаты XYZ (4 лапа)
+add-integer=99
+add-integer=211
+add-integer=0
+
+'= Крепление конечности координаты XYZ (5 лапа)
+add-integer=157
+add-integer=211
+add-integer=0
+
+'= Крепление конечности координаты XYZ (6 лапа)
+add-integer=157
+add-integer=211
+add-integer=0
+
+'= Крепление конечности координаты XYZ (7 лапа)
+add-integer=178
+add-integer=210
+add-integer=0
+
+'= Крепление конечности координаты XYZ (8 лапа)
+add-integer=178
+add-integer=210
+add-integer=0
+
+'= Крепление конечности координаты XYZ (9 хвост)
+add-integer=230
+add-integer=193
+add-integer=0
+
+end game-object-data
+
+next value
+
+end universal-values
+end other-values
+unit no-parts
+end unit

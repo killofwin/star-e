@@ -1,0 +1,66 @@
+begin unit
+speed=0
+type-unit=
+tactics=0
+formation=0
+group=0
+x=0
+y=0
+z=0
+writ=0
+writ-target=0
+writ-x=0
+writ-y=0
+writ-z=0
+begin other-values
+begin universal-values
+name=
+id=0
+next value
+name=
+id=10002
+value-godc=
+begin game-object-data
+add-string=Тестовый юнит
+add-string=
+add-string=
+add-string=
+add-string=pictures/test/test-model-1/body-test-model-1.png
+add-string= Обычное описание юнита
+add-integer=0
+add-integer=25
+add-integer=193
+add-integer=0
+add-integer=59
+add-integer=207
+add-integer=0
+add-integer=59
+add-integer=207
+add-integer=0
+add-integer=99
+add-integer=211
+add-integer=0
+add-integer=99
+add-integer=211
+add-integer=0
+add-integer=157
+add-integer=211
+add-integer=0
+add-integer=157
+add-integer=211
+add-integer=0
+add-integer=178
+add-integer=210
+add-integer=0
+add-integer=178
+add-integer=210
+add-integer=0
+add-integer=230
+add-integer=193
+add-integer=0
+end game-object-data
+next value
+end universal-values
+end other-values
+unit no-parts
+end unit

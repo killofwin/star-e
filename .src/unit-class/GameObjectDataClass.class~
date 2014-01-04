@@ -1,0 +1,98 @@
+' Gambas class file
+
+' Это класс контейнер предназначенный для хранения тех свойств объектов значимость которых не исчерпывается
+' каким либо одним параметром
+' Проще говоря данный класс хранит множество других параметров объекта
+' GroupUniversalValues.Values
+ 
+Public Strings As New String[] ' строки
+Public IntegerValues As New Integer[] ' целые числа
+Public SingleValues As New Single[] ' дробные числа
+
+Public Function SaveClass() As String[]
+  ' Функция сохраняет данные класса в строковый массив
+  Dim Srm As New String[]  ' массив для результата
+  Dim MaxString As Integer ' колличество строк
+  Dim MaxInteger As Integer ' колличество целых чисел
+  Dim MaxSingle As Integer ' колличество дробных чисел
+  
+  Dim a As Integer
+  
+  MaxString = Strings.Max
+  MaxInteger = IntegerValues.Max
+  MaxSingle = SingleValues.Max
+  
+  Srm.Add("begin game-object-data") ' заголовок
+  
+  If Strings.Count > 0 Then
+   'строки есть 
+   For a = 0 To MaxString
+    'перебор и запись всех строк 
+    Srm.Add("add-string=" & Strings[a])
+   Next
+  Endif
+  
+  If IntegerValues.Count > 0 Then
+   'целые числа есть 
+   For a = 0 To MaxInteger
+    'перебор и запись всех целых чисел 
+    Srm.Add("add-integer=" & LTrim(Str(IntegerValues[a]))) ' лучше всё таки при конвертировании сразу обрезать пробелы
+   Next
+  Endif
+  
+  If SingleValues.Count > 0 Then
+   'дробные числа есть 
+   For a = 0 To MaxSingle
+    'перебор и запись всех дробных чисел 
+    Srm.Add("add-single=" & LTrim(Str(SingleValues[a])))
+   Next
+  Endif
+  Srm.Add("end game-object-data")  
+  
+  Return Srm ' собственно возврат значения
+End
+
+Public Sub LoadClass(DataArray As String[])
+ 'функция принимает массив строк и загружает данные в класс предварительно удаляя прошлые
+ Dim sdata As New ClassStringData
+ Dim a As Integer ' счётчик цикла
+ Dim sm As Integer ' колличество переданных строк
+ Dim w As String ' текущая обрабатываемая строка
+ 
+ Dim OP As String 'оператор в строке
+ Dim ValueS As String ' значение в строке
+ 
+ Strings.Clear
+ IntegerValues.Clear
+ SingleValues.Clear ' предварительная очистка значений класса 
+ sm = DataArray.Max ' подсчёт колличества строк
+ 
+ For a = 0 To sm
+  'перебор строк
+  'тут нужно использовать разложение строк, а именно функции GetOpS и GetValueS
+  w = DataArray[a] ' присваивание значения в кэширующую локальную переменную
+  OP = sdata.GetOpS(w) ' извелечение из строки оператора
+  'анализ оператора, 3 варианта
+  If OP = "add-string" Then
+    'строка
+    ValueS = sdata.GetValueS(w) ' извлечение строкового значения
+    Strings.Add(ValueS) ' добавление строкового значения
+  Endif
+  If OP = "add-integer" Then
+    'целое число
+    ValueS = sdata.GetValueS(w) ' извлечение числового значения
+    IntegerValues.Add(Val(ValueS)) ' добавление целого числа
+  Endif
+  If OP = "add-single" Then
+    'дробное число
+    ValueS = sdata.GetValueS(w) ' извлечение дробного значения
+    SingleValues.Add(Val(ValueS)) ' добавление дробного числа
+  Endif 
+  
+  If op = "end game-object-data" Then Break ' досрочный выход если описание законченно, своеобразная подстраховка на случай отсутствия нужной фильтрации уровнем выше
+      
+ Next
+ ' Ну вроде всё присвоено, что ещё делать?..
+ 
+  
+End

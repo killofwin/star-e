@@ -1,0 +1,41 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,85.7143,57.1429)
+  Background = &H000000&
+  Foreground = &H2FDA00&
+  Text = ("Звёздные инжинеры 1")
+  Resizable = False
+  { PictureBoxLogo PictureBox
+    MoveScaled(0,0,72,48)
+    Picture = Picture["logo-main-menu.png"]
+  }
+  { TextLabelLogo TextLabel
+    MoveScaled(1,1,50,4)
+    Font = Font["Anime Ace v05,Bold,+3"]
+    Text = ("Звёздные инженеры 1")
+  }
+  { TextLabelLogo2 TextLabel
+    MoveScaled(1,7,38,4)
+    Font = Font["Anime Ace v05,Italic,+2"]
+    Text = ("Первичная эволюция")
+  }
+  { ButtonStartDemo Button
+    MoveScaled(1,51,50,5)
+    Text = ("Старт одиночной демонстрационной игры")
+  }
+  { ButtonExit Button
+    MoveScaled(64,51,21,5)
+    Text = ("Выход из игры")
+    Cancel = True
+  }
+  { ButtonStartDesign Button
+    MoveScaled(56,41,29,5)
+    Text = ("Старт редактора юнитов")
+  }
+  { TestButton Button
+    MoveScaled(1,43,39,6)
+    Font = Font["a_FuturaRoundDemi,-1"]
+    Text = ("Тестовая проверка функций и кусков кода")
+  }
+}

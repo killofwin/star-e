@@ -1,0 +1,19 @@
+' Gambas module file
+
+'Констаты для структуры AnyValue.TypeValue
+Public Const TypeValueString As Integer = 1 ' строка
+Public Const TypeValueNumber As Integer = 2 ' целочисленное
+Public Const TypeValueSingle As Integer = 3 ' с плавающей точкой
+Public Const TypeValueBackup As Integer = 4 ' запасное заречервированное значение
+
+
+
+
+
+
+Public Sub test()
+ 
+ 
+  
+  
+End

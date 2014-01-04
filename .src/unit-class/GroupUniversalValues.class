@@ -1,0 +1,394 @@
+' Gambas class file
+
+' GroupUniversalValues
+' Класс содержащий дополнительные свойства для юнита или части юнита
+' Содержит пачку дополнительных свойств
+
+' Как работать с данным классом
+' Нужно сначала запросить номер искомого элемента по имени или ID 
+' После проверить не равно ли оно -1 что означает отсутствие этого свойства у объекта
+' И если всё в порядке то обратиться к массиву Values и извлечь оттуда элемент по нужному номеру
+
+Public NameValue As New String[] ' имя параметра
+Public IDValue As New Integer[] ' числовое значение совпадающее с именем параметра
+' каждый параметр должен должен обладать своим ID, а так же NameValue и IDValue должны быть синхронизированны
+Public Values As New Variant[] ' Всё таки я решил хранить значения в типе Variant
+  
+ '4 + 4 + 8 = 16 байт на одно свойство
+Public Count As Integer ' колличество свойств  
+  
+Public Function FindName(Name As String) As Integer
+  'Возвращает номер значения в массиве по имени, ищет его
+  Dim a As Integer ' счётчик цикла
+  Dim e As Boolean ' флаг досрочного выхода
+  Dim x As Integer ' возвращаемое значение
+  Dim m As Integer
+  m = NameValue.Max
+  x = -1 ' свойство не найдено
+  If Count > 0 Then
+   For a = 0 To m
+    If NameValue[a] = Name Then
+     'нужное имя найдено 
+     x = a ' присвоение значения возвращаемой переменной
+     e = True ' запланировать досрочный выход
+    End If
+    If e = True Then Break ' совершить досрочный выход
+   Next
+  End If 
+  Return x ' возвратить значение
+End
+
+Public Function FindID(ID As Integer) As Integer
+  'Возвращает номер значения в массиве по ID, ищет его
+  'Поиск по ID быстрее
+  Dim a As Integer ' счётчик цикла
+  Dim e As Boolean ' флаг досрочного выхода
+  Dim x As Integer ' возвращаемое значение
+  Dim m As Integer
+  m = IDValue.Max  
+  x = -1 ' свойство не найдено
+  If Count > 0 Then
+   For a = 0 To m
+    If IDValue[a] = ID Then
+     'нужное имя найдено 
+     x = a ' присвоение значения возвращаемой переменной
+     e = True ' запланировать досрочный выход
+    End If
+    If e = True Then Break ' совершить досрочный выход
+   Next
+  End If 
+  Return x ' возвратить значение
+End
+
+
+
+Public Function FindRangeID(MinID As Integer, MaxID As Integer) As Integer
+  ' Функция ищет ID в заданном диапазоне. И возвращает индекс первого найденого значения
+  Dim a As Integer ' счётчик цикла
+  Dim e As Boolean ' флаг досрочного выхода
+  Dim x As Integer ' возвращаемое значение
+  Dim m As Integer
+  m = IDValue.Max  
+  x = -1 ' свойство не найдено
+  If Count > 0 Then
+   For a = 0 To m
+    If IDValue[a] >= MinID Then
+     'значение больше или равно минимальному
+     If IDValue[a] <= MaxID Then
+       'Значение меньше или равно максимальному
+       x = a ' присвоение значения возвращаемой переменной
+       e = True ' запланировать досрочный выход 
+     Endif
+    Endif
+    If e = True Then Break ' совершить досрочный выход
+   Next
+  End If 
+  Return x ' возвратить значение
+  
+End
+
+Public Function FindRangeArrayID(MinID As Integer, MaxID As Integer) As Integer[]
+  ' Функция ищет ID в заданном диапазоне. И возвращает индексы всех найденых значений
+  Dim a As Integer ' счётчик цикла
+  Dim e As Boolean ' флаг досрочного выхода
+  Dim x As New Integer[] ' возвращаемые значения. Если не будет найдено ни одного, то присвоить нулевому элементу массива значение -1
+  Dim m As Integer
+  m = IDValue.Max  
+  If Count > 0 Then
+   For a = 0 To m
+    If IDValue[a] >= MinID Then
+     'значение больше или равно минимальному
+     If IDValue[a] <= MaxID Then
+       'Значение меньше или равно максимальному
+       x.Add(a) ' Добавление результата в массив
+       'e = True ' запланировать досрочный выход 
+       'Планировать выход не надо, так как следует просмотреть все значения в массиве
+     Endif
+    Endif
+    'If e = True Then Break ' совершить досрочный выход
+   Next
+  End If 
+  If x.Count = 0 Then
+    'Результата нет
+    x.Add(-1, 0) ' свойство не найдено
+  Endif
+  Return x ' возвратить значение
+  
+End
+
+
+
+
+
+
+
+'Функция добавления значения
+Public Function AddValueName(Name As String, Value As Variant, Optional ID As Integer = 0) As Integer
+ 'добавляет значение по имени, возвращает тот же результат что и FindName, а именно номер значения в массиве Values[]
+ 'не проверяет есть ли значение уже в массиве
+ Values.Add(Value)
+ NameValue.Add(Name)
+ IDValue.Add(ID)
+ Count = Count + 1 ' увеличение счётчика
+ Return Count ' возвратить номер добавленного элемента
+End
+Public Function AddValueID(ID As Integer, Value As Variant, Optional Name As String = "") As Integer
+ 'добавляет значение по ID, возвращает тот же результат что и FindID, а именно номер значения в массиве Values[]
+ 'не проверяет есть ли значение уже в массиве
+ Values.Add(Value)
+ NameValue.Add("")
+ IDValue.Add(ID)
+ Count = Count + 1 ' увеличение счётчика
+ Return Count ' возвратить номер добавленного элемента
+End
+
+'Функции редактирования/добавления значения
+
+Public Function EditValueName(Name As String, Value As Variant, Optional ID As Integer = 0) As Integer
+ 'Изменяет значение по имени или добавляет его если оно отсутствует
+  Dim a As Integer
+  Dim c As Integer
+  Dim v As Integer
+  
+  v = FindName(Name) ' следует оптимизировать методом китайского кода
+  If v = -1 Then
+    'значение не найдено
+    c = AddValueName(Name, Value, ID) ' создать нужное значение
+  Endif
+  If v > -1 Then
+   'значение найдено 
+   Values[v] = Value ' присвоить значение
+   c = v
+  Endif
+  Return c ' возвратить номер присвоенного значения
+End
+
+Public Function EditValueID(ID As Integer, Value As Variant, Optional Name As String = "") As Integer
+ 'Изменяет значение по ID или добавляет его если оно отсутствует
+  Dim a As Integer
+  Dim c As Integer
+  Dim v As Integer
+  
+  v = FindID(ID) ' следует оптимизировать методом китайского кода
+  If v = -1 Then
+    'значение не найдено
+    c = AddValueID(ID, Value, Name) ' создать нужное значение
+  Endif
+  If v > -1 Then
+   'значение найдено 
+   Values[v] = Value ' присвоить значение
+   c = v
+  Endif
+  Return c ' возвратить номер присвоенного значения
+End
+
+
+Public Sub _new()
+ 'при создании объекта необходимо записать балластное свойство
+ Dim v As Variant
+ Values.Add(v, 0)
+ NameValue.Add("", 0)
+ IDValue.Add(0, 0)
+ Count = 0 ' установка счётчика в 0 
+End
+
+' Функции возвращающие нужные значения сразу. Будут оптимизированы методом китайского кода
+Public Function GetValueName(Name As String, Optional DefaultValue As Variant = Null) As Variant
+ Dim rv As Variant
+ Dim nv As Integer
+ nv = FindName(Name)
+ If nv <> -1 Then
+  rv = Values[nv] 
+ Endif
+ Return rv 
+End
+Public Function GetValueID(ID As Integer, Optional DefaultValue As Variant = Null) As Variant
+ Dim rv As Variant
+ Dim nv As Integer
+ rv = DefaultValue
+ nv = FindID(ID)
+ If nv <> -1 Then
+  rv = Values[nv] 
+ Endif
+ Return rv 
+End
+
+Public Function SaveClass() As String[]
+  'Функция возвращает массив строк содержащий все значения сохранённые в классе
+  Dim Srm As New String[] ' массив для результата
+  Dim r As String ' результат 1 строка
+  Dim a As Integer ' счётчик цикла
+  Dim m As Integer ' мксимальное значение цикла
+  Dim TypeGameObjectDataClass As Integer ' тип переменной
+  Dim t As New GameObjectDataClass ' пустая переменная для определения типа
+  
+  'переменные для сохранения вложенных значений GameObjectDataClass
+  Dim godcStrings As New String[] 'массив для временного хранения строк
+  Dim godcA As Integer ' счётчик цикла для перебора массива
+  Dim godcM As Integer ' конец счётчика
+  Dim godcLink As GameObjectDataClass ' переменная ссылка для ускорения опраций с объектом
+  
+  TypeGameObjectDataClass = TypeOf(t) ' тип контейнера для сложных свойств-объектов с более чем одним параметров
+  m = Values.Max
+  Srm.Add("begin universal-values")
+  For a = 0 To m
+   'перебор всех значений
+   Srm.Add("name=" & NameValue[a])
+   Srm.Add("id=" & Str(IDValue[a]))
+   
+   If TypeOf(Values[a]) = gb.Integer Then
+    'значение integer
+     Srm.Add("value-integer=" & Str(Values[a]))
+   Endif
+   If TypeOf(Values[a]) = gb.Single Then
+    'значение Single
+     Srm.Add("value-single=" & Str(Values[a]))
+   Endif
+   If TypeOf(Values[a]) = gb.Float Then
+    'значение float
+     Srm.Add("value-float=" & Str(Values[a]))
+   Endif
+   If TypeOf(Values[a]) = gb.String Then
+    'значение строка
+     Srm.Add("value-string=" & Values[a])
+   Endif
+   If TypeOf(Values[a]) = TypeGameObjectDataClass Then
+    'комплексное значение GameObjectDataClass
+    'здесь надо будет сохранено куча строк 
+    Srm.Add("value-godc=") ' GameObjectDataClass
+    godcStrings.Clear ' очистка массива
+    godcLink = Null ' обнудение переменной ссылки
+    godcLink = Values[a] ' присвоение ссылки, в дальнейшем использовать для операций эту ссылку
+    godcStrings = godcLink.SaveClass() ' сохранение класса в массив
+    ' а теперь надо перебрать массив и сохранить его строки в массиве Srm этого класса
+    godcM = godcStrings.Max ' узнать индекс последнего элемента в массиве 
+    For godcA = 0 To godcM
+      'собственно перебор
+      Srm.Add(godcStrings[godcA]) ' добавить в Srm массив значение из возвращённого массива
+    Next
+    
+   Endif
+   
+   Srm.Add("next value")
+     
+  Next
+  Srm.Add("end universal-values")
+  Return Srm
+End
+
+Public Sub LoadClass(DataArray As String[])
+  ' Функция загружает в класс необходимые значения
+  ' Она будет сложнее чем GameObjectDataClass ибо ей нужно фильтровать много типов значений
+  ' Надо бы придумать формат
+  ' 
+  ' Формат:
+  ' name=Ox
+  ' id=150
+  ' value-integer=10
+  ' next value
+  ' name=axe
+  ' id=1
+  ' value-godc
+  ' begin game-object-data
+  ' данные GameObjectDataClass
+  ' end game-object-data
+  ' end universal-values
+  
+  Dim a As Integer 'счётчик цикла
+  Dim m As Integer 'ограничитель цикла
+  Dim Name As String ' имя
+  Dim ID As Integer ' ID
+  
+  Dim sdata As New ClassStringData ' класс для операций разложения строк
+  Dim OP As String
+  Dim Value As String ' переменные для кэширования значений операций разложения строки
+  Dim r As Integer ' временная переменная
+    
+  Dim DataValue As Variant ' значение
+  Dim ValueInteger As Integer
+  Dim ValueSingle As Single
+  Dim ValueFloat As Float
+  Dim ValueString As String
+  Dim ValueGODC As GameObjectDataClass ' значения конкретных типов. Создание и инициализация объекта проходит внутри тела процедуры
+  Dim Srm As New String[] ' текстовый массив для вложенных сложных типов
+  
+  Count = 0
+  NameValue.Clear
+  IDValue.Clear
+  Values.Clear ' очистка объекта от старых данных
+  '_new ' нициализация объекта заново и создание балластного значения под индексом 0
+  ' Это вызов не нужен так как приводит при каждой загрузке/сохранении к дублированию элемента 0
+  ' поэтому следует заранее установить счётчик в отметку -1
+  Count = -1 ' В данном случае расчёт идёт на то что сначала элементы добавляються в массив, а потом увеличивается на 1
+  ' счётчик Count То есть при доблении 1го элемента, он будет иметь индекс 0 . Это то самое балластное значение в массиве
+  ' Не следует использовать кэшированные значения индексов после перезагрузки классов.
+  ' Это нужно потому что в дальнейшем внутреняя нумерация может быть изменена
+    
+  m = DataArray.Max ' установление ограничителя цикла
+  
+  For a = 0 To m
+    'перебор строк
+    OP = sdata.GetOpS(DataArray[a])
+    Value = sdata.GetValueS(DataArray[a]) ' разложение строки на оператор и параметр
+    
+    If OP = "name" Then
+      'присвоение имени
+      Name = Value
+    Endif
+    If OP = "id" Then
+      'присвоение ID
+      ID = Val(Value)
+    Endif
+    
+    If OP = "value-integer" Then
+      'целое число 
+      ValueInteger = Val(Value) ' присвоение и преобразование в нужный тип средствами runtime среды
+      DataValue = ValueInteger ' присовение преобразованного значения переменной variant      
+    Endif
+    If OP = "value-single" Then
+      'дробное число
+      ValueSingle = Val(Value) ' присвоение и преобразование в нужный тип средствами runtime среды
+      DataValue = ValueSingle ' присовение преобразованного значения переменной variant      
+    Endif
+    If OP = "value-float" Then
+      'float
+      ValueFloat = Val(Value) ' присвоение и преобразование в нужный тип средствами runtime среды
+      DataValue = ValueFloat ' присовение преобразованного значения переменной variant      
+    Endif
+    If OP = "value-string" Then
+      'строка
+      ValueString = Value ' присвоение и преобразование в нужный тип средствами runtime среды
+      DataValue = ValueString ' присовение преобразованного значения переменной variant      
+    Endif
+    
+    If OP = "value-godc" Then
+      ' вложенный сложный объект
+      ' Тут то придёться подумать как правильно это написать
+      ValueGODC = New GameObjectDataClass ' создание нового сложного объекта
+      Srm.Clear
+      Do 
+        'цикл перебора строк
+        a = a + 1 ' увеличение счётчика вышестоящего цикла FOR 
+        OP = sdata.GetOpS(DataArray[a]) ' вычленение оператора
+        Srm.Add(DataArray[a]) ' копирование строки во временный массив
+      Loop Until OP = "end game-object-data" ' окончание описания сложного объекта
+      ' Строки относящиеся к вложенному объекту скопированны в массив Srm
+      ' Счётчик (a) тоже скорректирован что бы не просматривать строки относящиеся к вложенному объекту ещё раз
+      ValueGODC.LoadClass(Srm)  ' обработка строк вложенным сложным объектом и загрузка в него данных
+      DataValue = ValueGODC ' присвоение ссылки переменной типа Variant, промежуточной
+      ValueGODC = Null ' очистка первичной ссылки на загруженный сложный объект
+    Endif
+    
+    If OP = "next value" Then
+      'следующее значение, присвоить
+      r = AddValueID(ID, DataValue, Name) ' здесь мы добавляем новое значение и кэшируем его позицию в списке для быстрого использования
+      ' использеться функция AddValueID которая не проверяет есть ли уже объект в массиве
+      DataValue = Null ' обнуление используемых переменных
+      ID = 0
+      Name = ""
+    Endif
+    
+  Next
+  
+End
+

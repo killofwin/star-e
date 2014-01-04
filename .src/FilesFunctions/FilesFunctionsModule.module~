@@ -1,0 +1,44 @@
+' Gambas module file
+
+' FilesFunctionsModule
+' Данный модуль предназначен для функций оперирующих с файлами
+ 
+Public Function GetDirectoryFile(PathFile As String) As String ' получение каталога файла по его абсолютному пути
+  Dim r As String
+  Dim a As Integer
+  Dim m As Integer
+  Dim b As Integer
+  r = ""
+  m = Len(PathFile)
+  If m > 1 Then
+   For a = m To 0 Step -1
+     'перебор с коца строки
+     If Mid(PathFile, a, 1) = "/" Then
+       If b = 0 Then b = a ' дополнительная проверка, не знаю зачем
+     Endif
+     If b > 0 Then Break ' досрочный выход
+   Next
+   r = Mid(PathFile, 1, b - 1) ' получить результат
+  Endif
+  Return r
+End
+
+Public Function GetArrayStringFile(NameFile As String, Optional SafeArray As Boolean = False) As String[] ' функция возвращает строки из файла в виде массива
+  Dim r As New String[] ' возвращаемый массив
+  Dim f As File
+  Dim s As String
+  
+  f = Open NameFile For Input
+  Do While f.EndOfFile = True ' повторять до окончания файла
+    Line Input #f, s '
+    r.Add(s) '
+  Loop
+  f.Close
+  
+  If SafeArray And r.Count < 1 Then
+    ' нужно обезопасить массив добавив в него фиктивный элемент
+     
+  Endif
+    
+  Return r '
+End

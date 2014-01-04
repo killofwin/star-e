@@ -1,0 +1,126 @@
+' Gambas class file
+
+  'PartUnitClass
+  
+  Public HP As Integer ' здоровье
+  Public Armor As Integer ' броня
+  Public HpArmor As Integer ' целостность брони
+  Public ArmorK As Integer ' коэффициент повреждаемости брони, в процентах
+  Public MinimalDemageArmor As Integer ' минимальный предел наносимого повреждения, если наносимое повреждение меньше, то оно не имеет значения
+  Public ChanceDemage As Integer ' процент покрытия бронёй, проще говоря вероятность того что броня примет урон на себя
+  
+  Public MaxHP As Integer ' предел здоровья
+  Public MaxArmor As Integer ' предел брони
+  
+  Public Weight As Integer ' масса в граммах
+  Public Power As Integer ' сила в ньютонах
+  ' 40 байт 
+  
+  'надо будет предусмотреть параметры регенерации 
+  
+  Public OtherValues As New GroupUniversalValues ' прочие значения в универсальных типах
+  '+20 байта 
+  
+Public Sub LoadClass(ByRef DataArray As String[], Optional StartLoad As Integer = 0, StopLoad As Integer = -1)  'загрузка класса из массива строк
+  'Так же принимает StartLoad и StopLoad для ограничения просматриваемой в массиве области
+  Dim sData As New ClassStringData ' класс для операций со строками
+  Dim a As Integer '
+  Dim oValues As String[] ' массив для OtherValues
+  Dim m As Integer
+  Dim BeginOV As Integer ' та строка после которой идут свойства OtherValues
+  Dim OP As String ' оператор
+  Dim Value As String ' параметр оператора
+  
+  m = DataArray.Max
+  If StopLoad <> -1 Then m = StopLoad
+  
+  BeginOV = sData.FindStringIndex(DataArray, "begin other-values", StartLoad, StopLoad) ' где закнчиваются основные свойства и начинаються дополнительные
+      
+  For a = StartLoad To BeginOV ' просмотр от начала описания до начала описания дополнительных свойств
+    'присвоение базовых свойств объекта
+    OP = sData.GetOpS(DataArray[a])
+    Value = sData.GetValueS(DataArray[a]) ' выборка значений из строки
+        
+    'присвоение нужных свойств
+    If OP = "hp" Then
+      'HP
+      HP = Val(Value)
+    Endif
+    If OP = "armor" Then
+      'Armor
+      Armor = Val(Value)
+    Endif
+    If OP = "hp-armor" Then
+      'HpArmor
+      HpArmor = Val(Value)
+    Endif
+    If OP = "armork" Then
+      'ArmorK
+      ArmorK = Val(Value)
+    Endif
+    If OP = "minimal-demage-armor" Then
+      'MinimalDemageArmor
+      MinimalDemageArmor = Val(Value)
+    Endif
+    If OP = "chance-demage" Then
+      'ChanceDemage
+      ChanceDemage = Val(Value)
+    Endif
+    If OP = "max-hp" Then
+      'MaxHP
+      MaxHP = Val(Value)
+    Endif
+    If OP = "weight" Then
+      ' Weight
+      Weight = Val(Value)
+    Endif
+    If OP = "power" Then
+      ' Power
+      Power = Val(Value)
+    Endif
+    If OP = "" Then
+      '
+      ' = Val(Value)
+    Endif
+        
+  Next
+  
+  ' Присваивание OtherValues
+  oValues = sData.CopyStringArray(DataArray, BeginOV, m) ' получение массива с OtherValues (копирование фрагмента из основного)
+  OtherValues.LoadClass(oValues) ' зарузка нужных строк в OtherValues
+  
+End
+
+Public Function SaveClass() As String[]
+  ' Функция возвращает строковый массив вмещающий данные класса.
+  Dim rArray As New String[] ' возвращаемый массив
+  Dim oValues As String[] ' прочие значения из массива OtherValues
+  Dim a As Integer ' счётчик цикла
+  Dim m As Integer ' ограничитель цикла
+  
+  rArray.Add("begin part-unit") ' начало описания
+  rArray.Add("hp=" & LTrim(Val(HP))) ' HP
+  'rArray.Add("=" & LTrim(Val())) ' 
+  rArray.Add("armor=" & LTrim(Val(Armor))) ' Armor
+  rArray.Add("hp-armor=" & LTrim(Val(HpArmor))) ' HpArmor
+  rArray.Add("armorK=" & LTrim(Val(ArmorK))) ' ArmorK
+  rArray.Add("minimal-demage-armor=" & LTrim(Val(MinimalDemageArmor))) ' MinimalDemageArmor
+  rArray.Add("chance-demage=" & LTrim(Val(ChanceDemage))) ' ChanceDemage
+  rArray.Add("max-hp=" & LTrim(Val(MaxHP))) ' MaxHP
+  rArray.Add("weight=" & LTrim(Val(Weight))) ' Weight
+  rArray.Add("power=" & LTrim(Val(Power))) ' Power
+  'rArray.Add("=" & LTrim(Val())) ' для сохранения других общих свойств
+  
+  oValues = OtherValues.SaveClass() ' сохранение остальных свойств объекта
+  
+  m = oValues.Max
+  For a = 0 To m
+    ' добавление в массив нужных значений
+    rArray.Add(oValues[a])
+  Next
+  
+  rArray.Add("end part-unit") ' конец описания
+  Return rArray ' возврат значения
+  
+End
+

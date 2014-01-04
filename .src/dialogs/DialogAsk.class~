@@ -1,0 +1,68 @@
+' Gambas class file
+
+Public nb As New Button[]
+
+Public Sub Form_Open()
+
+  
+
+End
+
+Public Function Ask(Optional TitleAsk As String = "Ask", Optional TextAsk As String = "Щито?", Optional Answers As String[] = Null, Optional PictureAsk As Picture = Null, Optional DefaultIndex As Integer = 0, Optional CancelIndex As Integer = 1, Optional Variant0 As String = "OK", Optional Variant1 As String = "Cancel", Optional Variant2 As String = "") As Integer
+  ' Функция возвращает выбранный вариант ответа
+  ' Принимает: заголовок окна, текст вопроса, массив ответов, картинку вопроса, индекс ответа "по умолчанию" начало с нуля, индекс отмены и 3 варианта ответа вне массива, которые будут задействованны только если массив не будет передан.
+  'Dim nb As Button 
+  Dim m As Integer
+  Dim a As Integer
+  Dim Otvets As String[]
+  Dim r As Integer
+  Dim nbx As Integer
+  Dim tnb As Button
+  'nb = New Button(HSplitButton)
+  
+  If Answers = Null Then
+    ' Если массив пустой
+    Otvets = New String[]
+    Otvets.Add(Variant0)
+    Otvets.Add(Variant1)
+    If Len(Variant2) > 0 Then Otvets.Add(Variant2)
+  Else
+    ' Если массив не пустой
+    Otvets = Answers 
+  Endif
+  
+  m = Otvets.Max
+  If Otvets.Count > 0 Then
+    ' Если в массиве есть варианты
+    For a = 0 To m
+      
+      tnb = New Button(HSplitButton) As "AnswerButton"
+      nb.Add(tnb)
+      nb[a].Text = Otvets[a] ' присвоение надписи
+      nb[a].Tag = a ' присвоение тэга
+      nb[a].Tooltip = Str(a)
+      If a = DefaultIndex Then nb[a].Default = True
+      If a = CancelIndex Then nb[a].Cancel = True
+      'Print nb.Name
+      nb[a].Proxy = AnswerButton
+      Object.Attach(nb[a], HSplitButton, "AnswerButton" & Trim(Str(a)))
+      Print nb[a].Name
+    Next
+         
+  Endif
+  
+  r = -1
+  Me.ShowModal
+  
+  Return r
+End
+
+
+Public Sub AnswerButton_Click()
+  Print "=="
+  Print Last.Name & "   " & Last.Tag 
+End
+
+Public Sub AnswerButton1_Click()
+  Print "ololo1"
+End

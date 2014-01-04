@@ -1,0 +1,394 @@
+' Gambas class file
+
+' DesignUnitForm
+
+Public Unit As New UnitClass ' Редактируемый юнит
+Public FileName As String ' Текущий редактируемый файл. Полный путь, возможен абсолютный
+Public UnitChanged As Boolean ' Изменился ли юнит
+Public CurrentPath As String ' Текущий путь. Путь к каталогу в котором находиться редактируемый файл
+
+Private LimbsPictures As New PictureBox[10] ' изображения конечностей юнита
+Private LimbsTexts As New TextBox[10] ' названия конечностей юнита
+
+Public Sub LoadUnit(NameFile As String) 
+  ' Загрузка юнита для редактирования
+  Dim f As File
+  Dim a As Integer
+  Dim ArrayS As New String[] ' массив для строк загружаемого юнита
+  Dim s As String
+    
+  f = Open NameFile For Input ' Открыть файл
+  
+  Do
+    ' читать файл до конца
+     Line Input #f, s ' считать строку
+     ArrayS.Add(s) ' добавить строку в массив
+     'a = a + 1 ' счётчик строк
+     'Print s
+  Loop Until f.EndOfFile
+  f.Close ' Закрыть файл
+  
+  Unit.LoadClass(ArrayS) ' Загрузить юнит
+  CurrentPath = FilesFunctionsModule.GetDirectoryFile(NameFile)
+  UnitChanged = False ' юнит загружен, ещё не изменён
+  
+  'Print "ololo" & Str(Unit.OtherValues.Count)
+  
+  'Надо дописать процедуру установки имени файла
+  'Пишу
+  FileName = NameFile ' установка имени файла
+  ' Предупреждение, в процедуре Новый файл (загрузка шаблона) следует изменить расширение "blank-unit" на "unit"
+  ' Иначе пользователь сможет нечайно повредить шаблон
+  'Собственно всё
+  
+  
+End
+
+
+
+Public Sub ButtonLoadMorfid_Click()
+  ' Кнопка загрузки морфида
+  Dim Paths As New String[] ' Пути где могут распологаться файлы с морфидами
+  Dim FF As New FileDialogForm ' форма диалога запроса файлов
+  Dim AskF As New FormDialogA3 ' диалоговое окно на всякий случай
+  Dim AskN As Integer ' ответ от диалогового окна
+  Dim tq As String ' текст для диалогового окна
+  Dim Y As Boolean ' загрузить юнита
+  
+  Dim NameFile As String ' имя файла который надо загрузить
+  
+  NameFile = ""
+  
+  ' Проверка наличия путей
+  If Exist("~/.star-e/editor-2d-1") Then Paths.Add("~/.star-e/editor-2d-1")
+  If Exist("/usr/share/star-e/editor-2d-1") Then Paths.Add("/usr/share/star-e/editor-2d-1")
+  If Exist(Application.Path & "/" & "editor-2d-1") Then Paths.Add(Application.Path & "/" & "editor-2d-1") ' CurrentPath
+  
+  
+  If UnitChanged = False Then Y = True
+  
+  If UnitChanged = True Then
+    ' Изменения не сохранены
+    tq = ("Вы сделали изменения в файле, которые будут утеряны если их не сохранить.") & Chr(10)
+    tq = tq & ("Программа предлагает их сохранить или отказаться от их сохранения.")
+    tq = tq & ("Так же можно отменить это действие и вернуться к редактированию нажав ОТМЕНА")
+    
+    AskN = AskF.Question(tq, ("Изменения не сохранены"), ("Сохранить"), ("Отмена"), ("Не сохранять"), 0, 1) ' Спросить пользователя надо ли сохранять файл
+    If AskN = -1 Or AskN = 1 Then
+      ' Выбрана отмена действия, возврат к редактированию файла
+      Return 
+    Endif
+    If AskN = 0 Then
+      ' сохранить файл
+      ButtonSaveMorfid_Click() ' нажать СОХРАНИТЬ
+      If UnitChanged = False Then Y = True ' Если пользователь сохранил файл, то можно загрузить новый
+    Endif
+    If AskN = 2 Then
+      ' НЕ сохранить файл, информация не нужна
+      Y = True ' Загрузить новый
+    Endif
+    
+  Endif
+   
+  If Y = True Then
+    ' Если файл можно загружать
+    NameFile = FF.AskFileName(("Загрузка морфида"),, ("Загрузить"), ("Отмена"), "*.unit", PictureUnit.Picture,,,, Paths)                                                
+    ' Запрос имени файл у пользователя
+    'Print NameFile  
+    
+    If Len(NameFile) > 0 Then LoadUnit(NameFile) ' загрузка файла
+    RefreshUnit() ' перерисовать юнита
+  End If
+    
+  AskF = Null
+  
+End
+
+Public Sub RefreshUnit()
+  ' Перерисовать юнита
+  Dim a As Integer
+  Dim o As Integer
+  Dim m As Integer
+  Dim e2d As New Editor2D ' класс для 2D редактора юнитов
+  Dim egodc As GameObjectDataClass ' сложное свойство для редактора юнитов
+  ' Нарисовать основу
+   
+  o = Unit.OtherValues.FindID(e2d.Editor2dUnitMorfid)   ' получение нужного свойства
+  'Print e2d.Editor2dUnitMorfid
+  'Print o
+  
+  'For a = 0 To Unit.OtherValues.IDValue.Max
+  '  Print Unit.OtherValues.IDValue[a]
+  'Next
+  'Print Unit.OtherValues.IDValue.Max
+  
+  If o > -1 Then
+    'свойство найдено
+    egodc = Unit.OtherValues.Values[o] ' присвоение ссылки для последующего ускорения операций
+    PictureBody.Picture = Picture.Load(CurrentPath & "/" & egodc.Strings[e2d.PropertyUnitMorfidFilePicture])
+    PictureBody.Visible = True
+  Endif
+  
+  m = LimbsPictures.Max
+  For a = 0 To m
+    LimbsPictures[a].Visible = False  ' сделать все части юнитов невидимыми
+  Next
+  For a = 0 To m
+    ' Нарисовать все части
+    RefreshPartUnit(a) ' нарисовать часть a 
+  Next
+  
+End
+
+Public Sub RefreshPartUnit(Part As Integer)
+  'Перерисовать часть юнита Part
+  Dim a As Integer
+  Dim o As Integer
+  Dim e2d As New Editor2D ' класс для 2D редактора юнитов
+  Dim egodc As GameObjectDataClass ' сложное свойство для редактора юнитов
+  Dim FilePicture As String ' имя файла с изображением
+  
+  If Part <= Unit.Parts.Max Then
+    ' Если часть не выходит за колличество частей
+    If Not (Unit.Parts[Part] = Null) Then
+      ' Если часть таки есть
+      o = Unit.Parts[Part].OtherValues.FindID(e2d.Editor2dPartUnitMorfid) ' Поиск описания части юнита
+      If o > -1 Then
+        ' Описание части юнита найдено
+        egodc = Unit.Parts[Part].OtherValues.Values[o] ' Присвоение ссылки на сложное свойство с описанием части
+        LimbsTexts[Part].Text = egodc.Strings[e2d.PropertyPartUnitMorfidName] ' Имя части
+        FilePicture = egodc.Strings[e2d.PropertyPartUnitMorfidFilePicture] ' получние имени файла изображения
+        
+        If Len(FilePicture) > 0 Then
+          ' Если есть картинка
+          LimbsPictures[Part].Picture = Picture.Load(FilePicture) ' установить требуемую картинку
+          LimbsPictures[Part].X = egodc.IntegerValues[e2d.PropertyPartUnitMorfidX]
+          LimbsPictures[Part].Y = egodc.IntegerValues[e2d.PropertyPartUnitMorfidY] ' Установка координат
+          LimbsPictures[Part].Visible = True ' сделать видимым
+        Endif
+        
+      Endif
+    Endif
+  Endif
+   
+  
+End
+
+
+Public Sub ButtonNewMorfid_Click()
+  'новый морфид
+  Dim Paths As New String[] ' Пути где могут распологаться файлы с морфидами
+  Dim FF As New FileDialogForm ' форма диалога запроса файлов
+  Dim AskF As New FormDialogA3 ' диалоговое окно на всякий случай
+  Dim AskN As Integer ' ответ от диалогового окна
+  Dim tq As String ' текст для диалогового окна
+  Dim Y As Boolean ' загрузить шаблон юнита
+  
+  Dim NameFile As String ' имя файла который надо загрузить
+  
+  NameFile = ""
+  
+  ' Проверка наличия путей
+  If Exist("~/.star-e/editor-2d-1") Then Paths.Add("~/.star-e/editor-2d-1")
+  If Exist("/usr/share/star-e/editor-2d-1") Then Paths.Add("/usr/share/star-e/editor-2d-1")
+  If Exist(Application.Path & "/" & "editor-2d-1") Then Paths.Add(Application.Path & "/" & "editor-2d-1") ' CurrentPath
+  
+  'If Not (Application.Path = "/usr/share/star-e") Then
+  '  If Exist(Application.Path & "/editor-2d-1") Then Paths.Add(Application.Path & "/editor-2d-1")
+  'Endif
+  If UnitChanged = False Then Y = True
+  
+  If UnitChanged = True Then
+    ' Изменения не сохранены
+    tq = ("Вы сделали изменения в файле, которые будут утеряны если их не сохранить.") & Chr(10)
+    tq = tq & ("Программа предлагает их сохранить или отказаться от их сохранения.")
+    tq = tq & ("Так же можно отменить это действие и вернуться к редактированию нажав ОТМЕНА")
+    
+    AskN = AskF.Question(tq, ("Изменения не сохранены"), ("Сохранить"), ("Отмена"), ("Не сохранять"), 0, 1) ' Спросить пользователя надо ли сохранять файл
+    If AskN = -1 Or AskN = 1 Then
+      ' Выбрана отмена действия, возврат к редактированию файла
+      Return 
+    Endif
+    If AskN = 0 Then
+      ' сохранить файл
+      ButtonSaveMorfid_Click() ' нажать СОХРАНИТЬ
+      If UnitChanged = False Then Y = True ' Если пользователь сохранил файл, то можно загрузить новый
+    Endif
+    If AskN = 2 Then
+      ' НЕ сохранить файл, информация не нужна
+      Y = True ' Загрузить новый
+    Endif
+    
+  Endif
+   
+  If Y = True Then
+    ' Если файл можно очистить
+    NameFile = FF.AskFileName(("Загрузка шаблона морфида"),, ("Загрузить"), ("Отмена"), "*.blank-unit", PictureBlankUnit.Picture,,,, Paths)                                                
+    ' Запрос имени файл у пользователя
+    'Print NameFile  
+    
+    If Len(NameFile) > 0 Then
+      ' загрузка файла
+      LoadUnit(NameFile) ' файл загружен
+      ' Теперь надо заменить ".blank-unit" на ".unit" иначе пользователь повредит шаблон
+      FileName = Mid(FileName, 1, Len(FileName) - Len(".blank-unit")) & ".unit"
+    Endif 
+    RefreshUnit() ' перерисовать юнита
+  End If
+  
+  'Print FileName
+  AskF = Null
+  
+End
+
+Public Sub ButtonSaveMorfid_Click()
+  ' Сохранить морфида
+  'Dim ArrayS As New String[]
+  'Dim ArrayP As New Picture[]
+  'Dim FileForm As New FileDialogFormSave ' диалоговое окно
+  Dim NFile As String
+  Dim b As Boolean
+  Dim rr As Integer ' ответ из диалогового окна
+  
+  If FileName = "" Then
+    ' Имя файла пустое
+    ' Значит перевести на "Сохранить как"
+    ButtonSaveAsMorfid_Click()
+  Else
+    ' Имя файла не пустое
+    SaveUnit(FileName) ' Сохранить файл
+    UnitChanged = False ' Все изменения сохранены
+  Endif
+  
+'  FileForm = Null
+End
+
+Public Sub ButtonSaveAsMorfid_Click()
+  ' Сохранить как..
+  Dim FileForm As New FileDialogFormSave ' форма сохранения
+  Dim nFile As String ' имя файла
+  nFile = FileForm.AskFileName(("Сохранить морфида под именем"), CurrentPath, ("Сохранить"), ("Не сохранять"), "*.unit", PictureUnit.Picture,,,, True)                             
+  If NFile = "" Then
+    ' имя файла пустое, отмена
+  Else  
+    ' Задано новое имя файла
+    FileName = nFile ' присвоить новое имя файла
+    SaveUnit(FileName) ' Сохранить файл
+    UnitChanged = False ' Все изменения сохранены 
+  Endif
+End
+
+Public Sub SaveUnit(NameFile As String)
+  ' Сохраняет текущего редактируемого юнита в указанном файле
+  Dim f As File
+  Dim ArrayS As String[]
+  Dim a As Integer
+  Dim m As Integer
+  ArrayS = Unit.SaveClass() ' сохранить юнита в строковый массив
+  m = ArrayS.Max
+  f = Open NameFile For Create ' открыть файл
+  For a = 0 To m
+    Print #f, ArrayS[a] ' запись строки
+  Next
+  f.Close ' закрыть файл
+End
+
+
+
+Public Sub EventLimbButton(n As Integer)
+  ' кликнули по кнопки выбора части юнита
+  Dim FileForm As New FileDialogForm ' форма диалога
+  Dim PartFile As String
+  Dim LoadPart As PartUnitClass ' загружаемая часть
+  Dim ArrayS As String[] ' строки из загружаемого файла
+  
+  PartFile = FileForm.AskFileName(("Выбор части морфида"), CurrentPath, ("добавить эту часть морфиду"), ("Отмена, ничего не выбираю"), "*.part-unit", PicturePartUnit.Picture)                                           
+  If Len(PartFile) > 0 Then
+    ' Выбрана часть юнита
+    ' Теперь надо проверить подходит ли она
+    
+     
+     
+     
+  Endif
+  
+  RefreshUnit()
+  
+End
+
+
+
+Public Sub Form_Open()
+  
+  CurrentPath = Application.Path & "/" & "editor-2d-1" ' Текущий путь для редактора юнитов, потом надо будет изменить на ./star-e/editor-2d-1
+  
+  'Присвоение массивам
+  LimbsPictures[0] = PictureLimb0
+  LimbsPictures[1] = PictureLimb1
+  LimbsPictures[2] = PictureLimb2
+  LimbsPictures[3] = PictureLimb3
+  LimbsPictures[4] = PictureLimb4
+  LimbsPictures[5] = PictureLimb5
+  LimbsPictures[6] = PictureLimb6
+  LimbsPictures[7] = PictureLimb7
+  LimbsPictures[8] = PictureLimb8
+  LimbsPictures[9] = PictureLimb9
+  
+  LimbsTexts[0] = TextBoxLimb0
+  LimbsTexts[1] = TextBoxLimb1
+  LimbsTexts[2] = TextBoxLimb2
+  LimbsTexts[3] = TextBoxLimb3
+  LimbsTexts[4] = TextBoxLimb4
+  LimbsTexts[5] = TextBoxLimb5
+  LimbsTexts[6] = TextBoxLimb6
+  LimbsTexts[7] = TextBoxLimb7
+  LimbsTexts[8] = TextBoxLimb8
+  LimbsTexts[9] = TextBoxLimb9
+  
+End
+
+
+' События кнопок выбора части юнита
+Public Sub ButtonLimb0_Click()
+  EventLimbButton(0)
+End
+Public Sub ButtonLimb1_Click()
+  EventLimbButton(1)
+End
+Public Sub ButtonLimb2_Click()
+  EventLimbButton(2)
+End
+Public Sub ButtonLimb3_Click()
+  EventLimbButton(3)
+End
+Public Sub ButtonLimb4_Click()
+  EventLimbButton(4)
+End
+Public Sub ButtonLimb5_Click()
+  EventLimbButton(5)
+End
+Public Sub ButtonLimb6_Click()
+  EventLimbButton(6)
+End
+Public Sub ButtonLimb7_Click()
+  EventLimbButton(7)
+End
+Public Sub ButtonLimb8_Click()
+  EventLimbButton(8)
+End
+Public Sub ButtonLimb9_Click()
+  EventLimbButton(9)
+End
+
+
+
+Public Sub ButtonTest_Click()
+  Dim FormAsk As New FormDialogA3 
+  Dim r As Integer
+  Print FormAsk.Question("ololo вопрос " & Chr(10) & " с переводом строки " & Chr(10) & " и ещё одним переводом строки" & Chr(10) & "и ещё одним переводом строки", "Заголовок окна вопроса", "Конечно", "Нельзя", "Обратно",,, Picture.Load("Stalin1943.jpg"))
+     
+
+End
+
+
+
