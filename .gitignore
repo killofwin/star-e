@@ -1,7 +1,7 @@
 #Temp gambas files
 *.module~
 *.class~
-
+*.form~
 
 # Build and Object Folders
 bin/
