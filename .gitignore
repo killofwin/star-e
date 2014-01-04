@@ -1,3 +1,8 @@
+#Temp gambas files
+*.module~
+*.class~
+
+
 # Build and Object Folders
 bin/
 obj/
