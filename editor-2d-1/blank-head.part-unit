@@ -33,6 +33,9 @@ add-string=pictures/test/test-model-1/head-test-model-1.png
 '= Описание юнита
 add-string= Обычное описание
 
+'= Строка проверки дублирования
+add-string=head-test-1
+
 '= Тип необходимой симетрии (0-нет, 1- с нечётного, 2 - с чётного)
 add-integer=0
 
