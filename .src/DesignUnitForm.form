@@ -215,4 +215,9 @@
     Picture = Picture["file-types/blank-unit-type.file.png"]
     Border = Border.Plain
   }
+  { LabelSym Label
+    MoveScaled(1,21,31,4)
+    Text = ("Юнит валиден")
+    Border = Border.Etched
+  }
 }

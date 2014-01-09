@@ -305,6 +305,10 @@ Public Sub EventLimbButton(n As Integer)
   PartFile = FileForm.AskFileName(("Выбор части морфида"), CurrentPath, ("добавить эту часть морфиду"), ("Отмена, ничего не выбираю"), "*.part-unit", PicturePartUnit.Picture)                                           
   If Len(PartFile) > 0 Then
     ' Выбрана часть юнита
+    ' надо загрузить
+    
+    
+     
     ' Теперь надо проверить подходит ли она
     
      

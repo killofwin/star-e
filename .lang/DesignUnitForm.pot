@@ -14,84 +14,88 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: DesignUnitForm.form:51
+#: DesignUnitForm.form:52
 msgid "Редактор юнитов"
 msgstr ""
 
-#: DesignUnitForm.form:62
+#: DesignUnitForm.form:63
 msgid "Лапа 1"
 msgstr ""
 
-#: DesignUnitForm.form:68
+#: DesignUnitForm.form:69
 msgid "выбор"
 msgstr ""
 
-#: DesignUnitForm.form:78
+#: DesignUnitForm.form:79
 msgid "Лапа 2"
 msgstr ""
 
-#: DesignUnitForm.form:89
+#: DesignUnitForm.form:90
 msgid "Лапа 3"
 msgstr ""
 
-#: DesignUnitForm.form:100
+#: DesignUnitForm.form:101
 msgid "Лапа 4"
 msgstr ""
 
-#: DesignUnitForm.form:111
+#: DesignUnitForm.form:112
 msgid "Лапа 5"
 msgstr ""
 
-#: DesignUnitForm.form:122
+#: DesignUnitForm.form:123
 msgid "Лапа 6"
 msgstr ""
 
-#: DesignUnitForm.form:133
+#: DesignUnitForm.form:134
 msgid "Лапа 7"
 msgstr ""
 
-#: DesignUnitForm.form:144
+#: DesignUnitForm.form:145
 msgid "Лапа 8"
 msgstr ""
 
-#: DesignUnitForm.form:155
+#: DesignUnitForm.form:156
 msgid "хвост"
 msgstr ""
 
-#: DesignUnitForm.form:166
+#: DesignUnitForm.form:167
 msgid "голова"
 msgstr ""
 
-#: DesignUnitForm.form:250
+#: DesignUnitForm.form:251
 msgid "Test"
 msgstr ""
 
-#: DesignUnitForm.form:255
+#: DesignUnitForm.form:256
 msgid "Новый морфид"
 msgstr ""
 
-#: DesignUnitForm.form:260
+#: DesignUnitForm.form:261
 msgid "Загрузить морфида"
 msgstr ""
 
-#: DesignUnitForm.form:265
+#: DesignUnitForm.form:266
 msgid "Сохранить морфида"
 msgstr ""
 
-#: DesignUnitForm.form:270
+#: DesignUnitForm.form:271
 msgid "Test2"
 msgstr ""
 
-#: DesignUnitForm.form:275
+#: DesignUnitForm.form:276
 msgid "Test3"
 msgstr ""
 
-#: DesignUnitForm.form:280
+#: DesignUnitForm.form:281
 msgid "Test4"
 msgstr ""
 
-#: DesignUnitForm.form:299
+#: DesignUnitForm.form:300
 msgid "Сохранить как..."
+msgstr ""
+
+#: DesignUnitForm.form:312
+msgid "Юнит валиден"
 msgstr ""
 
 #: DesignUnitForm.class:72
