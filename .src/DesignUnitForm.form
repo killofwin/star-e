@@ -166,7 +166,7 @@
     MoveScaled(0,36,107,2)
   }
   { ButtonTest Button
-    MoveScaled(31,59,10,6)
+    MoveScaled(31,65,10,6)
     Text = ("Test")
   }
   { ButtonNewMorfid Button
@@ -182,15 +182,15 @@
     Text = ("Сохранить морфида")
   }
   { ButtonTest2 Button
-    MoveScaled(42,59,10,6)
+    MoveScaled(42,65,10,6)
     Text = ("Test2")
   }
   { ButtonTest3 Button
-    MoveScaled(53,59,10,6)
+    MoveScaled(53,65,10,6)
     Text = ("Test3")
   }
   { ButtonTest4 Button
-    MoveScaled(64,59,10,6)
+    MoveScaled(64,65,10,6)
     Text = ("Test4")
   }
   { PictureUnit PictureBox
@@ -216,8 +216,9 @@
     Border = Border.Plain
   }
   { LabelSym Label
-    MoveScaled(1,21,31,4)
+    MoveScaled(16,59,35,3)
     Text = ("Юнит валиден")
-    Border = Border.Etched
+    Alignment = Align.Center
+    Border = Border.Sunken
   }
 }

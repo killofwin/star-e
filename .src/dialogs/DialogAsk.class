@@ -43,10 +43,8 @@ Public Function Ask(Optional TitleAsk As String = "Ask", Optional TextAsk As Str
       nb[a].Tooltip = Str(a)
       If a = DefaultIndex Then nb[a].Default = True
       If a = CancelIndex Then nb[a].Cancel = True
-      'Print nb.Name
       nb[a].Proxy = AnswerButton
       Object.Attach(nb[a], HSplitButton, "AnswerButton" & Trim(Str(a)))
-      Print nb[a].Name
     Next
          
   Endif
@@ -59,10 +57,9 @@ End
 
 
 Public Sub AnswerButton_Click()
-  Print "=="
-  Print Last.Name & "   " & Last.Tag 
+ 
 End
 
 Public Sub AnswerButton1_Click()
-  Print "ololo1"
+  
 End

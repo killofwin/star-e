@@ -134,23 +134,27 @@ msgstr ""
 msgid "Загрузить"
 msgstr ""
 
-#: DesignUnitForm.class:226
+#: DesignUnitForm.class:146
+msgid "Юнит не валиден "
+msgstr ""
+
+#: DesignUnitForm.class:242
 msgid "Загрузка шаблона морфида"
 msgstr ""
 
-#: DesignUnitForm.class:270
+#: DesignUnitForm.class:286
 msgid "Сохранить морфида под именем"
 msgstr ""
 
-#: DesignUnitForm.class:305
+#: DesignUnitForm.class:327
 msgid "Выбор части морфида"
 msgstr ""
 
-#: DesignUnitForm.class:305
+#: DesignUnitForm.class:327
 msgid "добавить эту часть морфиду"
 msgstr ""
 
-#: DesignUnitForm.class:305
+#: DesignUnitForm.class:327
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 

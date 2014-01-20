@@ -24,15 +24,12 @@ Public Sub LoadUnit(NameFile As String)
      Line Input #f, s ' считать строку
      ArrayS.Add(s) ' добавить строку в массив
      'a = a + 1 ' счётчик строк
-     'Print s
   Loop Until f.EndOfFile
   f.Close ' Закрыть файл
   
   Unit.LoadClass(ArrayS) ' Загрузить юнит
   CurrentPath = FilesFunctionsModule.GetDirectoryFile(NameFile)
   UnitChanged = False ' юнит загружен, ещё не изменён
-  
-  'Print "ololo" & Str(Unit.OtherValues.Count)
   
   'Надо дописать процедуру установки имени файла
   'Пишу
@@ -94,8 +91,7 @@ Public Sub ButtonLoadMorfid_Click()
     ' Если файл можно загружать
     NameFile = FF.AskFileName(("Загрузка морфида"),, ("Загрузить"), ("Отмена"), "*.unit", PictureUnit.Picture,,,, Paths)                                                
     ' Запрос имени файл у пользователя
-    'Print NameFile  
-    
+       
     If Len(NameFile) > 0 Then LoadUnit(NameFile) ' загрузка файла
     RefreshUnit() ' перерисовать юнита
   End If
@@ -111,16 +107,12 @@ Public Sub RefreshUnit()
   Dim m As Integer
   Dim e2d As New Editor2D ' класс для 2D редактора юнитов
   Dim egodc As GameObjectDataClass ' сложное свойство для редактора юнитов
+  Dim SymmetryBin As Integer ' симметрия морфида
+  
   ' Нарисовать основу
    
   o = Unit.OtherValues.FindID(e2d.Editor2dUnitMorfid)   ' получение нужного свойства
-  'Print e2d.Editor2dUnitMorfid
-  'Print o
-  
-  'For a = 0 To Unit.OtherValues.IDValue.Max
-  '  Print Unit.OtherValues.IDValue[a]
-  'Next
-  'Print Unit.OtherValues.IDValue.Max
+ 
   
   If o > -1 Then
     'свойство найдено
@@ -138,6 +130,16 @@ Public Sub RefreshUnit()
     RefreshPartUnit(a) ' нарисовать часть a 
   Next
   
+  ' проверка симметрии
+  SymmetryBin = e2d.SymmetryMorfidTrue(Unit)
+  If SymmetryBin <> True Then
+    LabelSym.Text = ("Юнит не валиден ") & Bin(SymmetryBin, 16)
+  Else
+    LabelSym.Text = ("Юнит валиден")
+  Endif
+  
+    
+  
 End
 
 Public Sub RefreshPartUnit(Part As Integer)
@@ -150,11 +152,13 @@ Public Sub RefreshPartUnit(Part As Integer)
   
   If Part <= Unit.Parts.Max Then
     ' Если часть не выходит за колличество частей
+    
     If Not (Unit.Parts[Part] = Null) Then
       ' Если часть таки есть
       o = Unit.Parts[Part].OtherValues.FindID(e2d.Editor2dPartUnitMorfid) ' Поиск описания части юнита
       If o > -1 Then
         ' Описание части юнита найдено
+        
         egodc = Unit.Parts[Part].OtherValues.Values[o] ' Присвоение ссылки на сложное свойство с описанием части
         LimbsTexts[Part].Text = egodc.Strings[e2d.PropertyPartUnitMorfidName] ' Имя части
         FilePicture = egodc.Strings[e2d.PropertyPartUnitMorfidFilePicture] ' получние имени файла изображения
@@ -165,6 +169,7 @@ Public Sub RefreshPartUnit(Part As Integer)
           LimbsPictures[Part].X = egodc.IntegerValues[e2d.PropertyPartUnitMorfidX]
           LimbsPictures[Part].Y = egodc.IntegerValues[e2d.PropertyPartUnitMorfidY] ' Установка координат
           LimbsPictures[Part].Visible = True ' сделать видимым
+          
         Endif
         
       Endif
@@ -225,7 +230,7 @@ Public Sub ButtonNewMorfid_Click()
     ' Если файл можно очистить
     NameFile = FF.AskFileName(("Загрузка шаблона морфида"),, ("Загрузить"), ("Отмена"), "*.blank-unit", PictureBlankUnit.Picture,,,, Paths)                                                
     ' Запрос имени файл у пользователя
-    'Print NameFile  
+    
     
     If Len(NameFile) > 0 Then
       ' загрузка файла
@@ -236,7 +241,6 @@ Public Sub ButtonNewMorfid_Click()
     RefreshUnit() ' перерисовать юнита
   End If
   
-  'Print FileName
   AskF = Null
   
 End
@@ -299,16 +303,44 @@ Public Sub EventLimbButton(n As Integer)
   ' кликнули по кнопки выбора части юнита
   Dim FileForm As New FileDialogForm ' форма диалога
   Dim PartFile As String
-  Dim LoadPart As PartUnitClass ' загружаемая часть
+  Dim LoadPart As New PartUnitClass ' загружаемая часть
   Dim ArrayS As String[] ' строки из загружаемого файла
   
+  Dim FFC As New FilesFunctionsClass ' класс для операций с файлами.
+  Dim e2d As New Editor2D ' класс для работы с юнитом
+  
+  Dim a As Integer ' счётчик цикла
+  Dim m As Integer ' ограничитель цикла
+    
   PartFile = FileForm.AskFileName(("Выбор части морфида"), CurrentPath, ("добавить эту часть морфиду"), ("Отмена, ничего не выбираю"), "*.part-unit", PicturePartUnit.Picture)                                           
   If Len(PartFile) > 0 Then
     ' Выбрана часть юнита
     ' надо загрузить
-    
-    
      
+    Print PartFile
+    
+    
+    ArrayS = FFC.GetArrayStringFile(PartFile, True) ' получить массив строк из указанного файла
+    LoadPart.LoadClass(ArrayS) ' загрузить часть из массива строк в переменную
+    
+    'Проверка того случая когда у морфида отсутствуют конечности
+    'Если их нет. То их надо добавить
+    If Unit.Parts = Null Then
+      Unit.Parts = New PartUnitClass[] ' присвоить пустой массив если нет вообще ничего
+    Endif
+    If Unit.Parts.Count < 1 Then
+      Unit.Parts.Resize(9 + 1) ' итго 9. 0 - голова. 1-8 лапы. 9 - хвост.
+      ' Даёт массиву требуемый размер
+      m = Unit.Parts.Max
+      For a = 0 To m
+        Unit.Parts[a] = New PartUnitClass ' присваиваем пустышки
+      Next
+    Endif
+    
+    
+    
+    Unit.Parts[n] = LoadPart ' присовить загруженную часть указанной конечности 
+    
     ' Теперь надо проверить подходит ли она
     
      
@@ -393,6 +425,8 @@ Public Sub ButtonTest_Click()
      
 
 End
+
+
 
 
 

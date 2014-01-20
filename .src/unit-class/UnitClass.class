@@ -146,18 +146,13 @@ Public Sub LoadClass(ByRef ArrayData As String[], Optional StartScan As Integer 
       
     Endif
     If Stage = 1 Then
-      'Print "---"
       ' считывание дополнительных свойств
       If sData.GetOpS(S) = "begin other-values" Then BeginOtherValues = a ' начало описания дополнительных свойств
       EndOtherValues = sData.FindStringIndex(ArrayData, "end other-values", BeginOtherValues, m) ' поиск окончания описания дополнительных типов
-      'Print EndOtherValues
       oValues = sData.CopyStringArray(ArrayData, BeginOtherValues, EndOtherValues) ' копирование нужного куска в другой массив
       OtherValues.LoadClass(oValues) ' загрузка массива дополнительных свойств
       Stage = 2 ' Стадия окончена
       a = EndOtherValues ' передвинуть счётчик что бы не просматривал уже загруженные данные
-      'Print m
-      'Print BeginOtherValues
-      'Print EndOtherValues
     Endif
     If Stage = 2 Then
       ' Стадия 2 Загрузка частей юнита

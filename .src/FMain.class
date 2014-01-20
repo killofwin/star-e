@@ -125,10 +125,6 @@ Public Sub TestButton_Click()
   Print "время с использованием уравнения в коде   " & Str(r)
   
     
-  'Dim b As New Integer[]
-  '
-  'b.Resize(5)
-  '
-  'Print "Max = " & Str(b.Max) ' 4
+
 
 End

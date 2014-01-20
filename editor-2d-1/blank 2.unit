@@ -62,5 +62,176 @@ end game-object-data
 next value
 end universal-values
 end other-values
-unit no-parts
+unit parts
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin universal-values
+name=
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
 end unit

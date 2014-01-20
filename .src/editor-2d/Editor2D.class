@@ -143,7 +143,7 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
   Dim bc As Integer ' дополнительный счётчик
   Dim p As Integer
   Dim m As Integer
-  Dim PartsGODC As GameObjectDataClass[] ' ссылки на нужные godc свойства частей юнита
+  Dim PartsGODC As New GameObjectDataClass[] ' ссылки на нужные godc свойства частей юнита
     
   Dim tp As Integer ' указатель в UnitMorfid.Parts[a].OtherValues
   Dim r As Integer ' результат

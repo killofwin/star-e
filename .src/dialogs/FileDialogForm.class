@@ -110,7 +110,6 @@ Public Sub RefreshFileList(Optional Title As String = "Select file", Optional Pa
           If ArrayA <= ArrayPictureM Then
             ' Массивы совпадают, можно искать
             If ArrayPictureFiles[ArrayA] = Null Then Pic = PictureFile.Picture ' картинка на тот случай если нет картинки
-            'If Not (ArrayPictureFiles[ArrayA] = Null) Then Print "OK"
             If Not (ArrayPictureFiles[ArrayA] = Null) Then Pic = ArrayPictureFiles[ArrayA]
           Endif
           If ArrayA > ArrayPictureM Then
@@ -130,7 +129,7 @@ Public Sub RefreshFileList(Optional Title As String = "Select file", Optional Pa
               'Если разрешено показывать скрытые файлы или если файл не скрытый
               ListFiles.Add(Path & "/" & FilesList[a], FilesList[a], Pic, "")
             End If  
-            'Print ArrayA
+            
           Next
         Endif
       Next
