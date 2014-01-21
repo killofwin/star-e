@@ -127,7 +127,7 @@ Public Sub RefreshUnit()
   Next
   For a = 0 To m
     ' Нарисовать все части
-    RefreshPartUnit(a) ' нарисовать часть a 
+    RefreshPartUnit(a, egodc) ' нарисовать часть a 
   Next
   
   ' проверка симметрии
@@ -142,13 +142,18 @@ Public Sub RefreshUnit()
   
 End
 
-Public Sub RefreshPartUnit(Part As Integer)
+Public Sub RefreshPartUnit(Part As Integer, Optional Unit2D As GameObjectDataClass = Null)
   'Перерисовать часть юнита Part
+  'Unit2D - это ссылка на данные 2D редактора объекта Unit
   Dim a As Integer
   Dim o As Integer
   Dim e2d As New Editor2D ' класс для 2D редактора юнитов
   Dim egodc As GameObjectDataClass ' сложное свойство для редактора юнитов
   Dim FilePicture As String ' имя файла с изображением
+  
+  Dim PartUnitLimbX As Integer
+  Dim PartUnitLimbY As Integer ' координаты крепления конечности
+  Dim PartUnitLimbZ As Integer
   
   If Part <= Unit.Parts.Max Then
     ' Если часть не выходит за колличество частей
@@ -163,13 +168,27 @@ Public Sub RefreshPartUnit(Part As Integer)
         LimbsTexts[Part].Text = egodc.Strings[e2d.PropertyPartUnitMorfidName] ' Имя части
         FilePicture = egodc.Strings[e2d.PropertyPartUnitMorfidFilePicture] ' получние имени файла изображения
         
+        If Unit2D = Null Then
+          'Если ссылка не переданна 
+          'Тогда ничего не делать
+        Else
+           ' установка креплений для конечностей
+           PartUnitLimbX = e2d.GetPartUnitMorfidX(Unit2D, Part)
+           'Unit2D.IntegerValues[e2d.GetPartUnitMorfidX(Part)]
+           PartUnitLimbY = e2d.GetPartUnitMorfidY(Unit2D, Part)
+           PartUnitLimbZ = e2d.GetPartUnitMorfidX(Unit2D, Part)
+        Endif
+        
         If Len(FilePicture) > 0 Then
           ' Если есть картинка
-          LimbsPictures[Part].Picture = Picture.Load(FilePicture) ' установить требуемую картинку
-          LimbsPictures[Part].X = egodc.IntegerValues[e2d.PropertyPartUnitMorfidX]
-          LimbsPictures[Part].Y = egodc.IntegerValues[e2d.PropertyPartUnitMorfidY] ' Установка координат
-          LimbsPictures[Part].Visible = True ' сделать видимым
+          'e2d.GetPartUnitMorfidX(Unit2D, Part)
           
+          ' Если есть картинка
+          LimbsPictures[Part].Picture = Picture.Load(CurrentPath & "/" & FilePicture) ' установить требуемую картинку
+          LimbsPictures[Part].X = PictureBody.X + PartUnitLimbX - egodc.IntegerValues[e2d.PropertyPartUnitMorfidX]
+          LimbsPictures[Part].Y = PictureBody.Y + PartUnitLimbY - egodc.IntegerValues[e2d.PropertyPartUnitMorfidY]
+          'LimbsPictures[Part].Y = [e2d.PropertyPartUnitMorfidY] - egodc.IntegerValues[e2d.PropertyPartUnitMorfidX] ' Установка координат
+          LimbsPictures[Part].Visible = True ' сделать видимым
         Endif
         
       Endif
@@ -316,11 +335,11 @@ Public Sub EventLimbButton(n As Integer)
   If Len(PartFile) > 0 Then
     ' Выбрана часть юнита
     ' надо загрузить
-     
-    Print PartFile
-    
     
     ArrayS = FFC.GetArrayStringFile(PartFile, True) ' получить массив строк из указанного файла
+    
+    
+    
     LoadPart.LoadClass(ArrayS) ' загрузить часть из массива строк в переменную
     
     'Проверка того случая когда у морфида отсутствуют конечности
@@ -419,14 +438,13 @@ End
 
 
 Public Sub ButtonTest_Click()
-  Dim FormAsk As New FormDialogA3 
-  Dim r As Integer
-  Print FormAsk.Question("ololo вопрос " & Chr(10) & " с переводом строки " & Chr(10) & " и ещё одним переводом строки" & Chr(10) & "и ещё одним переводом строки", "Заголовок окна вопроса", "Конечно", "Нельзя", "Обратно",,, Picture.Load("Stalin1943.jpg"))
-     
-
+  Dim ArrayS As String[]
+  Dim a As Integer
+  Dim FFC As New FilesFunctionsClass
+  ArrayS = FFC.GetArrayStringFile("/home/stas/Проекты/gambas 3/StarE/editor-2d-1/blank-fut.part-unit")
+  Print ArrayS.Max   
+  For a = 0 To ArrayS.Max
+    Print "=" & ArrayS[a]
+  Next
 End
-
-
-
-
 

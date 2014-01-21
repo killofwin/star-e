@@ -29,10 +29,12 @@ Public Function GetArrayStringFile(NameFile As String, Optional SafeArray As Boo
   Dim f As File
   Dim s As String
   
-  f = Open NameFile For Input
-  Do While f.EndOfFile = True ' повторять до окончания файла
-    Line Input #f, s '
-    r.Add(s) '
+  f = Open NameFile For Read ' Исправил с Input
+  
+  Do While f.EndOfFile = False  ' повторять до окончания файла
+    's = f.ReadLine()
+    Line Input #f, s
+    r.Add(s) 
   Loop
   f.Close
   

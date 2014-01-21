@@ -89,30 +89,31 @@ Public Function NewBlankGameObjectData(Optional ID As Integer = Editor2dPartUnit
 End
 
 
-Public Function GetPartUnitMorfidX(n As Integer) As Integer
+Public Function GetPartUnitMorfidX(Unit2D As GameObjectDataClass, n As Integer) As Integer
   'Вычисляет X координату n части Editor2dUnitMorfid
+  'Unit2D - это ссылка на 2D описание морфида первого типа
   Dim r As Integer ' результат
-  If GameObjectData.IntegerValues.Count >= CountUnitXYZ Then
+  If Unit2D.IntegerValues.Count >= CountUnitXYZ Then
     ' Массив имеет правильный размер
-    r = GameObjectData.IntegerValues[(n * 3) + 1]
+    r = Unit2D.IntegerValues[(n * 3) + 1]
   Endif
   Return r
 End
-Public Function GetPartUnitMorfidY(n As Integer) As Integer
+Public Function GetPartUnitMorfidY(Unit2D As GameObjectDataClass, n As Integer) As Integer
   'Вычисляет Y координату n части Editor2dUnitMorfid
   Dim r As Integer ' результат
-  If GameObjectData.IntegerValues.Count >= CountUnitXYZ Then
+  If Unit2D.IntegerValues.Count >= CountUnitXYZ Then
     ' Массив имеет правильный размер
-    r = GameObjectData.IntegerValues[(n * 3) + 2]
+    r = Unit2D.IntegerValues[(n * 3) + 2]
   Endif
   Return r
 End
-Public Function GetPartUnitMorfidZ(n As Integer) As Integer
+Public Function GetPartUnitMorfidZ(Unit2D As GameObjectDataClass, n As Integer) As Integer
   'Вычисляет Z координату n части Editor2dUnitMorfid
   Dim r As Integer ' результат
-  If GameObjectData.IntegerValues.Count >= CountUnitXYZ Then
+  If Unit2D.IntegerValues.Count >= CountUnitXYZ Then
     ' Массив имеет правильный размер
-    r = GameObjectData.IntegerValues[(n * 3) + 3]
+    r = Unit2D.IntegerValues[(n * 3) + 3]
   Endif
   Return r
 End

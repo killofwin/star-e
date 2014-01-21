@@ -98,65 +98,65 @@ msgstr ""
 msgid "Юнит валиден"
 msgstr ""
 
-#: DesignUnitForm.class:72
+#: DesignUnitForm.class:69
 msgid ""
 "Вы сделали изменения в файле, которые будут утеряны если их не сохранить."
 msgstr ""
 
-#: DesignUnitForm.class:73
+#: DesignUnitForm.class:70
 msgid "Программа предлагает их сохранить или отказаться от их сохранения."
 msgstr ""
 
-#: DesignUnitForm.class:74
+#: DesignUnitForm.class:71
 msgid ""
 "Так же можно отменить это действие и вернуться к редактированию нажав ОТМЕНА"
 msgstr ""
 
-#: DesignUnitForm.class:76
+#: DesignUnitForm.class:73
 msgid "Изменения не сохранены"
 msgstr ""
 
-#: DesignUnitForm.class:76
+#: DesignUnitForm.class:73
 msgid "Сохранить"
 msgstr ""
 
-#: DesignUnitForm.class:76
+#: DesignUnitForm.class:73
 msgid "Отмена"
 msgstr ""
 
-#: DesignUnitForm.class:76
+#: DesignUnitForm.class:73
 msgid "Не сохранять"
 msgstr ""
 
-#: DesignUnitForm.class:95
+#: DesignUnitForm.class:92
 msgid "Загрузка морфида"
 msgstr ""
 
-#: DesignUnitForm.class:95
+#: DesignUnitForm.class:92
 msgid "Загрузить"
 msgstr ""
 
-#: DesignUnitForm.class:146
+#: DesignUnitForm.class:136
 msgid "Юнит не валиден "
 msgstr ""
 
-#: DesignUnitForm.class:242
+#: DesignUnitForm.class:250
 msgid "Загрузка шаблона морфида"
 msgstr ""
 
-#: DesignUnitForm.class:286
+#: DesignUnitForm.class:293
 msgid "Сохранить морфида под именем"
 msgstr ""
 
-#: DesignUnitForm.class:327
+#: DesignUnitForm.class:334
 msgid "Выбор части морфида"
 msgstr ""
 
-#: DesignUnitForm.class:327
+#: DesignUnitForm.class:334
 msgid "добавить эту часть морфиду"
 msgstr ""
 
-#: DesignUnitForm.class:327
+#: DesignUnitForm.class:334
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 

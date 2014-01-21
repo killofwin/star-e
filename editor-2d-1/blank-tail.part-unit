@@ -57,7 +57,7 @@ add-integer=0
 '=Маска блокирования
 add-integer=0
 
-end game-object-data
+end game-object-data=
 next value
 end universal-values
 end part-unit
