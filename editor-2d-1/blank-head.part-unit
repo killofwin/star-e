@@ -20,7 +20,7 @@ value-godc=
 begin game-object-data
 
 '= Здесь название юнита для 2D редактора морфид
-add-string=Тестовая лапа
+add-string=Тестовая голова
 
 '= Поля зарезервированны
 add-string=

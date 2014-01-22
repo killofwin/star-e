@@ -448,3 +448,10 @@ Public Sub ButtonTest_Click()
   Next
 End
 
+
+Public Sub ButtonTest2_Click()
+
+  Dim f As New File
+  f.ReadLine
+
+End
