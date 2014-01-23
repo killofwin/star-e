@@ -14,147 +14,151 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: DesignUnitForm.form:52
+#: DesignUnitForm.form:53
 msgid "Редактор юнитов"
 msgstr ""
 
-#: DesignUnitForm.form:63
-msgid "Лапа 1"
-msgstr ""
-
-#: DesignUnitForm.form:69
-msgid "выбор"
-msgstr ""
-
-#: DesignUnitForm.form:79
-msgid "Лапа 2"
-msgstr ""
-
-#: DesignUnitForm.form:90
-msgid "Лапа 3"
-msgstr ""
-
-#: DesignUnitForm.form:101
-msgid "Лапа 4"
-msgstr ""
-
-#: DesignUnitForm.form:112
-msgid "Лапа 5"
-msgstr ""
-
-#: DesignUnitForm.form:123
-msgid "Лапа 6"
-msgstr ""
-
-#: DesignUnitForm.form:134
-msgid "Лапа 7"
-msgstr ""
-
-#: DesignUnitForm.form:145
-msgid "Лапа 8"
-msgstr ""
-
-#: DesignUnitForm.form:156
-msgid "хвост"
-msgstr ""
-
-#: DesignUnitForm.form:167
-msgid "голова"
-msgstr ""
-
-#: DesignUnitForm.form:251
+#: DesignUnitForm.form:138
 msgid "Test"
 msgstr ""
 
-#: DesignUnitForm.form:256
+#: DesignUnitForm.form:143
 msgid "Новый морфид"
 msgstr ""
 
-#: DesignUnitForm.form:261
+#: DesignUnitForm.form:148
 msgid "Загрузить морфида"
 msgstr ""
 
-#: DesignUnitForm.form:266
-msgid "Сохранить морфида"
+#: DesignUnitForm.form:153
+msgid "Сохранить морфид"
 msgstr ""
 
-#: DesignUnitForm.form:271
+#: DesignUnitForm.form:158
 msgid "Test2"
 msgstr ""
 
-#: DesignUnitForm.form:276
+#: DesignUnitForm.form:163
 msgid "Test3"
 msgstr ""
 
-#: DesignUnitForm.form:281
+#: DesignUnitForm.form:168
 msgid "Test4"
 msgstr ""
 
-#: DesignUnitForm.form:300
+#: DesignUnitForm.form:187
 msgid "Сохранить как..."
 msgstr ""
 
-#: DesignUnitForm.form:312
+#: DesignUnitForm.form:199
 msgid "Юнит валиден"
 msgstr ""
 
-#: DesignUnitForm.class:69
-msgid "Вы сделали изменения в файле, которые будут утеряны если их не сохранить."
+#: DesignUnitForm.form:209
+msgid "выбор"
 msgstr ""
 
-#: DesignUnitForm.class:70
-msgid "Программа предлагает их сохранить или отказаться от их сохранения."
+#: DesignUnitForm.form:214
+msgid "выбор"
+msgstr ""
+
+#: DesignUnitForm.form:219
+msgid "Лапа 2"
+msgstr ""
+
+#: DesignUnitForm.form:230
+msgid "Лапа 3"
+msgstr ""
+
+#: DesignUnitForm.form:241
+msgid "Лапа 4"
+msgstr ""
+
+#: DesignUnitForm.form:252
+msgid "Лапа 5"
+msgstr ""
+
+#: DesignUnitForm.form:263
+msgid "Лапа 6"
+msgstr ""
+
+#: DesignUnitForm.form:274
+msgid "Лапа 7"
+msgstr ""
+
+#: DesignUnitForm.form:285
+msgid "Лапа 8"
+msgstr ""
+
+#: DesignUnitForm.form:296
+msgid "хвост"
+msgstr ""
+
+#: DesignUnitForm.form:311
+msgid "голова"
+msgstr ""
+
+#: DesignUnitForm.form:317
+msgid "Лапа 1"
 msgstr ""
 
 #: DesignUnitForm.class:71
+msgid "Вы сделали изменения в файле, которые будут утеряны если их не сохранить."
+msgstr ""
+
+#: DesignUnitForm.class:72
+msgid "Программа предлагает их сохранить или отказаться от их сохранения."
+msgstr ""
+
+#: DesignUnitForm.class:73
 msgid "Так же можно отменить это действие и вернуться к редактированию нажав ОТМЕНА"
 msgstr ""
 
-#: DesignUnitForm.class:73
+#: DesignUnitForm.class:75
 msgid "Изменения не сохранены"
 msgstr ""
 
-#: DesignUnitForm.class:73
+#: DesignUnitForm.class:75
 msgid "Сохранить"
 msgstr ""
 
-#: DesignUnitForm.class:73
+#: DesignUnitForm.class:75
 msgid "Отмена"
 msgstr ""
 
-#: DesignUnitForm.class:73
+#: DesignUnitForm.class:75
 msgid "Не сохранять"
 msgstr ""
 
-#: DesignUnitForm.class:92
+#: DesignUnitForm.class:94
 msgid "Загрузка морфида"
 msgstr ""
 
-#: DesignUnitForm.class:92
+#: DesignUnitForm.class:94
 msgid "Загрузить"
 msgstr ""
 
-#: DesignUnitForm.class:136
+#: DesignUnitForm.class:142
 msgid "Юнит не валиден "
 msgstr ""
 
-#: DesignUnitForm.class:250
+#: DesignUnitForm.class:256
 msgid "Загрузка шаблона морфида"
 msgstr ""
 
-#: DesignUnitForm.class:293
+#: DesignUnitForm.class:305
 msgid "Сохранить морфида под именем"
 msgstr ""
 
-#: DesignUnitForm.class:334
+#: DesignUnitForm.class:346
 msgid "Выбор части морфида"
 msgstr ""
 
-#: DesignUnitForm.class:334
+#: DesignUnitForm.class:346
 msgid "добавить эту часть морфиду"
 msgstr ""
 
-#: DesignUnitForm.class:334
+#: DesignUnitForm.class:346
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 

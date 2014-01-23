@@ -14,19 +14,21 @@ Public Sub LoadUnit(NameFile As String)
   ' Загрузка юнита для редактирования
   Dim f As File
   Dim a As Integer
-  Dim ArrayS As New String[] ' массив для строк загружаемого юнита
+  Dim ArrayS As String[] ' массив для строк загружаемого юнита
   Dim s As String
+  Dim FFC As New FilesFunctionsClass
     
-  f = Open NameFile For Input ' Открыть файл
+  ' f = Open NameFile For Input ' Открыть файл
+  ' Do
+  '   ' читать файл до конца
+  '    Line Input #f, s ' считать строку
+  '    ArrayS.Add(s) ' добавить строку в массив
+  '    'a = a + 1 ' счётчик строк
+  ' Loop Until f.EndOfFile
+  ' f.Close ' Закрыть файл
   
-  Do
-    ' читать файл до конца
-     Line Input #f, s ' считать строку
-     ArrayS.Add(s) ' добавить строку в массив
-     'a = a + 1 ' счётчик строк
-  Loop Until f.EndOfFile
-  f.Close ' Закрыть файл
-  
+  ArrayS = FFC.GetArrayStringFile(NameFile, True) ' загрузка массива строк для последующего анализа
+    
   Unit.LoadClass(ArrayS) ' Загрузить юнит
   CurrentPath = FilesFunctionsModule.GetDirectoryFile(NameFile)
   UnitChanged = False ' юнит загружен, ещё не изменён
@@ -92,8 +94,12 @@ Public Sub ButtonLoadMorfid_Click()
     NameFile = FF.AskFileName(("Загрузка морфида"),, ("Загрузить"), ("Отмена"), "*.unit", PictureUnit.Picture,,,, Paths)                                                
     ' Запрос имени файл у пользователя
        
-    If Len(NameFile) > 0 Then LoadUnit(NameFile) ' загрузка файла
+    If Len(NameFile) > 0 Then
+     LoadUnit(NameFile) ' загрузка файла
+     EditControlsVisible(True) ' разрешить редактирование сделав элементы управления видимыми
+    Endif 
     RefreshUnit() ' перерисовать юнита
+    
   End If
     
   AskF = Null
@@ -254,10 +260,16 @@ Public Sub ButtonNewMorfid_Click()
     If Len(NameFile) > 0 Then
       ' загрузка файла
       LoadUnit(NameFile) ' файл загружен
+      
+      ' Строки не активны. Потому что правильнее было бы заменить имя на пустышку для правильного функционирования функции "Сохранить"
       ' Теперь надо заменить ".blank-unit" на ".unit" иначе пользователь повредит шаблон
-      FileName = Mid(FileName, 1, Len(FileName) - Len(".blank-unit")) & ".unit"
+      'FileName = Mid(FileName, 1, Len(FileName) - Len(".blank-unit")) & ".unit"
+      FileName = "" ' Замена на пустышку
+      
+      EditControlsVisible(True) ' разрешить редактирование сделав элементы управления видимыми
     Endif 
     RefreshUnit() ' перерисовать юнита
+    
   End If
   
   AskF = Null
@@ -265,7 +277,7 @@ Public Sub ButtonNewMorfid_Click()
 End
 
 Public Sub ButtonSaveMorfid_Click()
-  ' Сохранить морфида
+  ' Сохранить морфид
   'Dim ArrayS As New String[]
   'Dim ArrayP As New Picture[]
   'Dim FileForm As New FileDialogFormSave ' диалоговое окно
@@ -359,9 +371,11 @@ Public Sub EventLimbButton(n As Integer)
     
     
     Unit.Parts[n] = LoadPart ' присовить загруженную часть указанной конечности 
+    UnitChanged = True ' Юнит изменился
     
     ' Теперь надо проверить подходит ли она
-    
+    ' То есть устроить проверку валидности
+    ' Реализую
      
      
      
@@ -371,11 +385,22 @@ Public Sub EventLimbButton(n As Integer)
   
 End
 
+Public Sub EditControlsVisible(VisibleBoolean As Boolean)
+  ' Сделать функции редактирования видимыми или невидимыми
+  FrameEditControls.Visible = VisibleBoolean
+  ButtonSaveMorfid.Enabled = VisibleBoolean
+  ButtonSaveAsMorfid.Enabled = VisibleBoolean
+  
+End
+
 
 
 Public Sub Form_Open()
   
   CurrentPath = Application.Path & "/" & "editor-2d-1" ' Текущий путь для редактора юнитов, потом надо будет изменить на ./star-e/editor-2d-1
+  
+  EditControlsVisible(False)
+  
   
   'Присвоение массивам
   LimbsPictures[0] = PictureLimb0
@@ -455,3 +480,5 @@ Public Sub ButtonTest2_Click()
   f.ReadLine
 
 End
+
+

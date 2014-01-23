@@ -9,96 +9,6 @@
     AutoResize = True
     Border = Border.Plain
   }
-  { TextBoxLimb1 TextBox
-    MoveScaled(16,43,27.1429,3)
-    Text = ("Лапа 1")
-    ReadOnly = True
-  }
-  { ButtonLimb1 Button
-    MoveScaled(43,43,8.5714,3)
-    Text = ("выбор")
-  }
-  { ButtonLimb2 Button
-    MoveScaled(80,43,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb2 TextBox
-    MoveScaled(53,43,27.1429,3)
-    Text = ("Лапа 2")
-    ReadOnly = True
-  }
-  { ButtonLimb3 Button
-    MoveScaled(43,47,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb3 TextBox
-    MoveScaled(16,47,27.1429,3)
-    Text = ("Лапа 3")
-    ReadOnly = True
-  }
-  { ButtonLimb4 Button
-    MoveScaled(80,47,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb4 TextBox
-    MoveScaled(53,47,27.1429,3)
-    Text = ("Лапа 4")
-    ReadOnly = True
-  }
-  { ButtonLimb5 Button
-    MoveScaled(43,51,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb5 TextBox
-    MoveScaled(16,51,27.1429,3)
-    Text = ("Лапа 5")
-    ReadOnly = True
-  }
-  { ButtonLimb6 Button
-    MoveScaled(80,51,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb6 TextBox
-    MoveScaled(53,51,27.1429,3)
-    Text = ("Лапа 6")
-    ReadOnly = True
-  }
-  { ButtonLimb7 Button
-    MoveScaled(43,55,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb7 TextBox
-    MoveScaled(16,55,27.1429,3)
-    Text = ("Лапа 7")
-    ReadOnly = True
-  }
-  { ButtonLimb8 Button
-    MoveScaled(80,55,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb8 TextBox
-    MoveScaled(53,55,27.1429,3)
-    Text = ("Лапа 8")
-    ReadOnly = True
-  }
-  { ButtonLimb9 Button
-    MoveScaled(80,38,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb9 TextBox
-    MoveScaled(53,38,27.1429,3)
-    Text = ("хвост")
-    ReadOnly = True
-  }
-  { ButtonLimb0 Button
-    MoveScaled(43,38,8.5714,3)
-    Text = ("выбор")
-  }
-  { TextBoxLimb0 TextBox
-    MoveScaled(16,38,27.1429,3)
-    Text = ("голова")
-    ReadOnly = True
-  }
   { PictureLimb1 PictureBox
     MoveScaled(41,22,4.5714,4.5714)
     Visible = False
@@ -159,11 +69,8 @@
     AutoResize = True
     Border = Border.Plain
   }
-  { Separator1 Separator
-    MoveScaled(0,41,107,2)
-  }
   { Separator2 Separator
-    MoveScaled(0,36,107,2)
+    MoveScaled(16,36,72,2)
   }
   { ButtonTest Button
     MoveScaled(31,65,10,6)
@@ -179,7 +86,7 @@
   }
   { ButtonSaveMorfid Button
     MoveScaled(1,11,24,4)
-    Text = ("Сохранить морфида")
+    Text = ("Сохранить морфид")
   }
   { ButtonTest2 Button
     MoveScaled(42,65,10,6)
@@ -220,5 +127,101 @@
     Text = ("Юнит валиден")
     Alignment = Align.Center
     Border = Border.Sunken
+  }
+  { FrameEditControls Frame
+    MoveScaled(16,37,73,22)
+    { ButtonLimb1 Button
+      MoveScaled(27,5,8.5714,3)
+      Text = ("выбор")
+    }
+    { ButtonLimb2 Button
+      MoveScaled(64,5,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb2 TextBox
+      MoveScaled(37,5,27.1429,3)
+      Text = ("Лапа 2")
+      ReadOnly = True
+    }
+    { ButtonLimb3 Button
+      MoveScaled(27,9,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb3 TextBox
+      MoveScaled(0,9,27.1429,3)
+      Text = ("Лапа 3")
+      ReadOnly = True
+    }
+    { ButtonLimb4 Button
+      MoveScaled(64,9,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb4 TextBox
+      MoveScaled(37,9,27.1429,3)
+      Text = ("Лапа 4")
+      ReadOnly = True
+    }
+    { ButtonLimb5 Button
+      MoveScaled(27,13,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb5 TextBox
+      MoveScaled(0,13,27.1429,3)
+      Text = ("Лапа 5")
+      ReadOnly = True
+    }
+    { ButtonLimb6 Button
+      MoveScaled(64,13,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb6 TextBox
+      MoveScaled(37,13,27.1429,3)
+      Text = ("Лапа 6")
+      ReadOnly = True
+    }
+    { ButtonLimb7 Button
+      MoveScaled(27,17,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb7 TextBox
+      MoveScaled(0,17,27.1429,3)
+      Text = ("Лапа 7")
+      ReadOnly = True
+    }
+    { ButtonLimb8 Button
+      MoveScaled(64,17,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb8 TextBox
+      MoveScaled(37,17,27.1429,3)
+      Text = ("Лапа 8")
+      ReadOnly = True
+    }
+    { ButtonLimb9 Button
+      MoveScaled(64,0,8.5714,3)
+      Text = ("выбор")
+    }
+    { TextBoxLimb9 TextBox
+      MoveScaled(37,0,27.1429,3)
+      Text = ("хвост")
+      ReadOnly = True
+    }
+    { ButtonLimb0 Button
+      MoveScaled(27,0,8.5714,3)
+      Text = ("выбор")
+    }
+    { Separator1 Separator
+      MoveScaled(0,3,72,2)
+    }
+    { TextBoxLimb0 TextBox
+      MoveScaled(0,0,27.1429,3)
+      Text = ("голова")
+      ReadOnly = True
+    }
+    { TextBoxLimb1 TextBox
+      MoveScaled(0,5,27.1429,3)
+      Text = ("Лапа 1")
+      ReadOnly = True
+    }
   }
 }

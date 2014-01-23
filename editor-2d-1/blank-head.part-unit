@@ -10,6 +10,7 @@ chance-demage=0
 max-hp=0
 weight=0
 power=0
+begin other-values-part
 begin universal-values
 name=Балластное свойство
 id=0

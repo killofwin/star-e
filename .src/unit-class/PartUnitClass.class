@@ -32,10 +32,9 @@ Public Sub LoadClass(ByRef DataArray As String[], Optional StartLoad As Integer 
   Dim Value As String ' параметр оператора
   
   m = DataArray.Max
-  If StopLoad <> -1 Then m = StopLoad
+  If StopLoad <> -1 Then m = StopLoad ' установка ограничителя
   
-  BeginOV = sData.FindStringIndex(DataArray, "begin other-values", StartLoad, StopLoad) ' где закнчиваются основные свойства и начинаються дополнительные
-      
+  BeginOV = sData.FindStringIndex(DataArray, "begin other-values-part", StartLoad, StopLoad) ' где заканчиваются основные свойства и начинаются дополнительные
   For a = StartLoad To BeginOV ' просмотр от начала описания до начала описания дополнительных свойств
     'присвоение базовых свойств объекта
     OP = sData.GetOpS(DataArray[a])
@@ -110,6 +109,8 @@ Public Function SaveClass() As String[]
   rArray.Add("weight=" & LTrim(Str(Weight))) ' Weight
   rArray.Add("power=" & LTrim(Str(Power))) ' Power
   'rArray.Add("=" & LTrim(str())) ' для сохранения других общих свойств
+  
+  rArray.Add("begin other-values-part") ' добавил, возможно это поможет.
   
   oValues = OtherValues.SaveClass() ' сохранение остальных свойств объекта
   

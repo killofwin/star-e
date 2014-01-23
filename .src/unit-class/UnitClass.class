@@ -2,7 +2,7 @@
 
   Public Speed As Integer ' скорость
   Public Parts As New PartUnitClass[] ' конечности лапы
-  '1-8 лапы    9 голова     10 хвост
+  '1-8 лапы    9 голова     10 хвост (у морфида первого типа)
   
   Public TypeUnit As String ' наименование юнита
   
@@ -23,10 +23,6 @@
   Public WritY As Integer ' координаты точки назначения из приказа, если равны нулю или достигнутым, то происходит новый расчёт
   Public WritZ As Integer
   
-  'Public Sub _new()
-  ' Dim p As New PartUnitClass
-  ' Limb.Add(p) 
-  'End
 
 Public Function SaveClass() As String[]
   ' Сохраняет класс в виде массива строк
