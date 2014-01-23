@@ -148,7 +148,7 @@ Public Sub LoadClass(ByRef ArrayData As String[], Optional StartScan As Integer 
       oValues = sData.CopyStringArray(ArrayData, BeginOtherValues, EndOtherValues) ' копирование нужного куска в другой массив
       OtherValues.LoadClass(oValues) ' загрузка массива дополнительных свойств
       Stage = 2 ' Стадия окончена
-      a = EndOtherValues ' передвинуть счётчик что бы не просматривал уже загруженные данные
+      a = EndOtherValues  ' передвинуть счётчик что бы не просматривал уже загруженные данные
     Endif
     If Stage = 2 Then
       ' Стадия 2 Загрузка частей юнита
@@ -158,6 +158,7 @@ Public Sub LoadClass(ByRef ArrayData As String[], Optional StartScan As Integer 
       If sData.GetOpS(S) = "unit parts" Then
         ' У юнита есть части
         Stage = 3 
+        Parts.Clear ' очистить массив
       Endif
        
     Endif
@@ -175,7 +176,7 @@ Public Sub LoadClass(ByRef ArrayData As String[], Optional StartScan As Integer 
     m = sData.FindStringIndex(ArrayData, "end unit", a, m) ' поиск конца описания класса в массиве
     If m = -1 Then m = StopScan
     If m = -1 Then m = ArrayData.Max ' защита от дурака который не внесёт в файл "end unit"
-    
+    ' Тут упоминание двойное, потому что если StopScan не указан, то он равен -1
     
       
     Do
@@ -191,8 +192,8 @@ Public Sub LoadClass(ByRef ArrayData As String[], Optional StartScan As Integer 
       
       ' Здесь могло бы быть рассмотрение того что находиться между "unit end-part" и "unit begin-part"
       
-      If BeginPart <> -1 And EndPart <> -1 Then
-        ' часть найдена
+      If (BeginPart <> -1) And (EndPart <> -1) And (EndPart > 0) Then
+        ' часть найдена. Условие было усложнено And (EndPart > 0) из за того что оно срабатывало на значения (BeginPart = 0) и (EndPart = 0)
         PartTMP = Null ' обнулить на всякий случай
         PartTMP = New PartUnitClass ' создать новую часть для юнита
         PartTMP.LoadClass(ArrayData, BeginPart, EndPart) ' загрузить часть во временную переменную
