@@ -103,7 +103,7 @@ Public Sub ButtonLoadMorfid_Click()
   End If
     
   AskF = Null
-  
+  LabelChandedUpdate()
 End
 
 Public Sub RefreshUnit()
@@ -198,6 +198,12 @@ Public Sub RefreshPartUnit(Part As Integer, Optional Unit2D As GameObjectDataCla
         Endif
         
       Endif
+      If o = -1 Then
+        ' описание конечности не найдено. Присвоить пустые значения элементам отображения
+        LimbsTexts[Part].Text = ""
+        LimbsPictures[Part].Visible = False
+      Endif
+      
     Endif
   Endif
    
@@ -248,7 +254,7 @@ Public Sub ButtonNewMorfid_Click()
       ' НЕ сохранить файл, информация не нужна
       Y = True ' Загрузить новый
     Endif
-    
+    LabelChandedUpdate()
   Endif
    
   If Y = True Then
@@ -294,8 +300,7 @@ Public Sub ButtonSaveMorfid_Click()
     SaveUnit(FileName) ' Сохранить файл
     UnitChanged = False ' Все изменения сохранены
   Endif
-  
-'  FileForm = Null
+  LabelChandedUpdate()
 End
 
 Public Sub ButtonSaveAsMorfid_Click()
@@ -311,6 +316,7 @@ Public Sub ButtonSaveAsMorfid_Click()
     SaveUnit(FileName) ' Сохранить файл
     UnitChanged = False ' Все изменения сохранены 
   Endif
+  LabelChandedUpdate()
 End
 
 Public Sub SaveUnit(NameFile As String)
@@ -343,47 +349,62 @@ Public Sub EventLimbButton(n As Integer)
   Dim a As Integer ' счётчик цикла
   Dim m As Integer ' ограничитель цикла
     
-  PartFile = FileForm.AskFileName(("Выбор части морфида"), CurrentPath, ("добавить эту часть морфиду"), ("Отмена, ничего не выбираю"), "*.part-unit", PicturePartUnit.Picture)                                           
-  If Len(PartFile) > 0 Then
-    ' Выбрана часть юнита
-    ' надо загрузить
+  If ToggleButtonDeleteLimb.Value = False Then
+    ' Кнопка удаления не нажата
+    PartFile = FileForm.AskFileName(("Выбор части морфида"), CurrentPath, ("добавить эту часть морфиду"), ("Отмена, ничего не выбираю"), "*.part-unit", PicturePartUnit.Picture)                                           
+    If Len(PartFile) > 0 Then
+      ' Выбрана часть юнита
+      ' надо загрузить
     
-    ArrayS = FFC.GetArrayStringFile(PartFile, True) ' получить массив строк из указанного файла
+      ArrayS = FFC.GetArrayStringFile(PartFile, True) ' получить массив строк из указанного файла
+      LoadPart.LoadClass(ArrayS) ' загрузить часть из массива строк в переменную
     
+      'Проверка того случая когда у морфида отсутствуют конечности
+      'Если их нет. То их надо добавить
+      If Unit.Parts = Null Then
+        Unit.Parts = New PartUnitClass[] ' присвоить пустой массив если нет вообще ничего
+      Endif
+      If Unit.Parts.Count < 1 Then
+        Unit.Parts.Resize(9 + 1) ' итго 9. 0 - голова. 1-8 лапы. 9 - хвост.
+        ' Даёт массиву требуемый размер
+        m = Unit.Parts.Max
+        For a = 0 To m
+          Unit.Parts[a] = New PartUnitClass ' присваиваем пустышки
+        Next
+      Endif
     
-    
-    LoadPart.LoadClass(ArrayS) ' загрузить часть из массива строк в переменную
-    
-    'Проверка того случая когда у морфида отсутствуют конечности
-    'Если их нет. То их надо добавить
-    If Unit.Parts = Null Then
-      Unit.Parts = New PartUnitClass[] ' присвоить пустой массив если нет вообще ничего
+      Unit.Parts[n] = LoadPart ' присовить загруженную часть указанной конечности 
+      UnitChanged = True ' Юнит изменился
+      LabelChandedUpdate()
+      ' Теперь надо проверить подходит ли она в этот слот
+      ' То есть устроить проверку валидности
+      ' Проверка валидности
+      
+      
+      ' Реализую
+       
     Endif
-    If Unit.Parts.Count < 1 Then
-      Unit.Parts.Resize(9 + 1) ' итго 9. 0 - голова. 1-8 лапы. 9 - хвост.
-      ' Даёт массиву требуемый размер
-      m = Unit.Parts.Max
-      For a = 0 To m
-        Unit.Parts[a] = New PartUnitClass ' присваиваем пустышки
-      Next
-    Endif
     
+    Else
+      'нажата кнопка удаления 
+      Unit.Parts[n] = New PartUnitClass
+      'e2d.NewBlankGameObjectData(e2d.Editor2dPartUnitMorfid)
+      'REM
+      Print n
+      UnitChanged = True ' Юнит изменился
+      LabelChandedUpdate()
     
-    
-    Unit.Parts[n] = LoadPart ' присовить загруженную часть указанной конечности 
-    UnitChanged = True ' Юнит изменился
-    
-    ' Теперь надо проверить подходит ли она
-    ' То есть устроить проверку валидности
-    ' Реализую
-     
-     
-     
   Endif
   
   RefreshUnit()
   
 End
+
+Public Sub LabelChandedUpdate()
+  ' Обновление метки ("Не сохранено")
+  LabelChanded.Visible = UnitChanged
+End
+
 
 Public Sub EditControlsVisible(VisibleBoolean As Boolean)
   ' Сделать функции редактирования видимыми или невидимыми

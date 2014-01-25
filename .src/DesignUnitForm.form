@@ -123,7 +123,7 @@
     Border = Border.Plain
   }
   { LabelSym Label
-    MoveScaled(16,59,35,3)
+    MoveScaled(16,58,35,3)
     Text = ("Юнит валиден")
     Alignment = Align.Center
     Border = Border.Sunken
@@ -132,10 +132,12 @@
     MoveScaled(16,37,73,22)
     { ButtonLimb1 Button
       MoveScaled(27,5,8.5714,3)
+      ToolTip = ("лапа № 1")
       Text = ("выбор")
     }
     { ButtonLimb2 Button
       MoveScaled(64,5,8.5714,3)
+      ToolTip = ("лапа № 2")
       Text = ("выбор")
     }
     { TextBoxLimb2 TextBox
@@ -145,6 +147,7 @@
     }
     { ButtonLimb3 Button
       MoveScaled(27,9,8.5714,3)
+      ToolTip = ("лапа № 3")
       Text = ("выбор")
     }
     { TextBoxLimb3 TextBox
@@ -154,6 +157,7 @@
     }
     { ButtonLimb4 Button
       MoveScaled(64,9,8.5714,3)
+      ToolTip = ("лапа № 4")
       Text = ("выбор")
     }
     { TextBoxLimb4 TextBox
@@ -163,6 +167,7 @@
     }
     { ButtonLimb5 Button
       MoveScaled(27,13,8.5714,3)
+      ToolTip = ("лапа № 5")
       Text = ("выбор")
     }
     { TextBoxLimb5 TextBox
@@ -172,6 +177,7 @@
     }
     { ButtonLimb6 Button
       MoveScaled(64,13,8.5714,3)
+      ToolTip = ("лапа № 6")
       Text = ("выбор")
     }
     { TextBoxLimb6 TextBox
@@ -181,6 +187,7 @@
     }
     { ButtonLimb7 Button
       MoveScaled(27,17,8.5714,3)
+      ToolTip = ("лапа № 7")
       Text = ("выбор")
     }
     { TextBoxLimb7 TextBox
@@ -190,6 +197,7 @@
     }
     { ButtonLimb8 Button
       MoveScaled(64,17,8.5714,3)
+      ToolTip = ("лапа № 8")
       Text = ("выбор")
     }
     { TextBoxLimb8 TextBox
@@ -199,6 +207,7 @@
     }
     { ButtonLimb9 Button
       MoveScaled(64,0,8.5714,3)
+      ToolTip = ("хвост морфида (9 конечность)")
       Text = ("выбор")
     }
     { TextBoxLimb9 TextBox
@@ -208,6 +217,7 @@
     }
     { ButtonLimb0 Button
       MoveScaled(27,0,8.5714,3)
+      ToolTip = ("голова морфида (0 - конечность)")
       Text = ("выбор")
     }
     { Separator1 Separator
@@ -223,5 +233,18 @@
       Text = ("Лапа 1")
       ReadOnly = True
     }
+  }
+  { LabelChanded Label
+    MoveScaled(86,0,22,7)
+    Visible = False
+    Font = Font["a_FuturaRoundDemi,+4"]
+    Text = ("Не сохранён")
+    Alignment = Align.Center
+    Border = Border.Etched
+  }
+  { ToggleButtonDeleteLimb ToggleButton
+    MoveScaled(53,58,35,3)
+    ToolTip = ("Нажатие этой кнопки модифицирует действие кнопок \"выбор\" и не присваивает новую конечность, а удаляет её заменяя на пустую.")
+    Text = ("Удалять конечности")
   }
 }

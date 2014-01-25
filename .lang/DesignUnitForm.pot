@@ -14,92 +14,144 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: DesignUnitForm.form:53
+#: DesignUnitForm.form:55
 msgid "Редактор юнитов"
 msgstr ""
 
-#: DesignUnitForm.form:138
+#: DesignUnitForm.form:140
 msgid "Test"
 msgstr ""
 
-#: DesignUnitForm.form:143
+#: DesignUnitForm.form:145
 msgid "Новый морфид"
 msgstr ""
 
-#: DesignUnitForm.form:148
+#: DesignUnitForm.form:150
 msgid "Загрузить морфида"
 msgstr ""
 
-#: DesignUnitForm.form:153
+#: DesignUnitForm.form:155
 msgid "Сохранить морфид"
 msgstr ""
 
-#: DesignUnitForm.form:158
+#: DesignUnitForm.form:160
 msgid "Test2"
 msgstr ""
 
-#: DesignUnitForm.form:163
+#: DesignUnitForm.form:165
 msgid "Test3"
 msgstr ""
 
-#: DesignUnitForm.form:168
+#: DesignUnitForm.form:170
 msgid "Test4"
 msgstr ""
 
-#: DesignUnitForm.form:187
+#: DesignUnitForm.form:189
 msgid "Сохранить как..."
 msgstr ""
 
-#: DesignUnitForm.form:199
+#: DesignUnitForm.form:201
 msgid "Юнит валиден"
 msgstr ""
 
-#: DesignUnitForm.form:209
+#: DesignUnitForm.form:211
+msgid "лапа № 1"
+msgstr ""
+
+#: DesignUnitForm.form:212
 msgid "выбор"
 msgstr ""
 
-#: DesignUnitForm.form:214
-msgid "выбор"
+#: DesignUnitForm.form:217
+msgid "лапа № 2"
 msgstr ""
 
-#: DesignUnitForm.form:219
+#: DesignUnitForm.form:223
 msgid "Лапа 2"
 msgstr ""
 
+#: DesignUnitForm.form:229
+msgid "лапа № 3"
+msgstr ""
+
 #: DesignUnitForm.form:230
+msgid "выбор"
+msgstr ""
+
+#: DesignUnitForm.form:235
 msgid "Лапа 3"
 msgstr ""
 
 #: DesignUnitForm.form:241
+msgid "лапа № 4"
+msgstr ""
+
+#: DesignUnitForm.form:247
 msgid "Лапа 4"
 msgstr ""
 
-#: DesignUnitForm.form:252
+#: DesignUnitForm.form:253
+msgid "лапа № 5"
+msgstr ""
+
+#: DesignUnitForm.form:259
 msgid "Лапа 5"
 msgstr ""
 
-#: DesignUnitForm.form:263
+#: DesignUnitForm.form:265
+msgid "лапа № 6"
+msgstr ""
+
+#: DesignUnitForm.form:271
 msgid "Лапа 6"
 msgstr ""
 
-#: DesignUnitForm.form:274
+#: DesignUnitForm.form:277
+msgid "лапа № 7"
+msgstr ""
+
+#: DesignUnitForm.form:283
 msgid "Лапа 7"
 msgstr ""
 
-#: DesignUnitForm.form:285
+#: DesignUnitForm.form:289
+msgid "лапа № 8"
+msgstr ""
+
+#: DesignUnitForm.form:295
 msgid "Лапа 8"
 msgstr ""
 
-#: DesignUnitForm.form:296
+#: DesignUnitForm.form:301
+msgid "хвост морфида (9 конечность)"
+msgstr ""
+
+#: DesignUnitForm.form:307
 msgid "хвост"
 msgstr ""
 
-#: DesignUnitForm.form:311
+#: DesignUnitForm.form:313
+msgid "голова морфида (0 - конечность)"
+msgstr ""
+
+#: DesignUnitForm.form:323
 msgid "голова"
 msgstr ""
 
-#: DesignUnitForm.form:317
+#: DesignUnitForm.form:329
 msgid "Лапа 1"
+msgstr ""
+
+#: DesignUnitForm.form:338
+msgid "Не сохранён"
+msgstr ""
+
+#: DesignUnitForm.form:345
+msgid "Нажатие этой кнопки модифицирует действие кнопок \"выбор\" и не присваивает новую конечность, а удаляет её заменяя на пустую."
+msgstr ""
+
+#: DesignUnitForm.form:346
+msgid "Удалять конечности"
 msgstr ""
 
 #: DesignUnitForm.class:71
@@ -142,23 +194,23 @@ msgstr ""
 msgid "Юнит не валиден "
 msgstr ""
 
-#: DesignUnitForm.class:256
+#: DesignUnitForm.class:262
 msgid "Загрузка шаблона морфида"
 msgstr ""
 
-#: DesignUnitForm.class:305
+#: DesignUnitForm.class:310
 msgid "Сохранить морфида под именем"
 msgstr ""
 
-#: DesignUnitForm.class:346
+#: DesignUnitForm.class:354
 msgid "Выбор части морфида"
 msgstr ""
 
-#: DesignUnitForm.class:346
+#: DesignUnitForm.class:354
 msgid "добавить эту часть морфиду"
 msgstr ""
 
-#: DesignUnitForm.class:346
+#: DesignUnitForm.class:354
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 
