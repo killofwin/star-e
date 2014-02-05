@@ -20,7 +20,8 @@ Public Const PropertyPartUnitMorfidY As Integer = 2 ' Y координата к�
 Public Const PropertyPartUnitMorfidZ As Integer = 3 ' Z координата крепления
 Public Const PropertyPartUnitMorfidAppointment As Integer = 4 ' назначение части морфида 0-голова, 1 - конечность, 9 - хвост
 
-Public Const PropertyPartUnitMorfidFilePicture As Integer = 4  ' Имя файла с картинкой
+Public Const PropertyPartUnitMorfidFilePicture2 As Integer = 3  ' Имя файла с картинкой для чётной конечности
+Public Const PropertyPartUnitMorfidFilePicture As Integer = 4  ' Имя файла с картинкой (для нечётной конечности)
 Public Const PropertyPartUnitMorfidDescription As Integer = 5  ' Описание юнита
 
 Public Const PropertyPartUnitMorfidMaskD As Integer = 5 ' маска дублирования

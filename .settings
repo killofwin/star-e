@@ -8,10 +8,11 @@ Count=0
 Geometry=[0,0,210,210]
 
 [OpenFile]
+Active=1
 File[1]=".src/DesignUnitForm.form"
-Active=2
-File[2]=".src/DesignUnitForm.class:381.6"
-Count=2
+File[2]=".src/DesignUnitForm.class:202.34"
+File[3]=".src/editor-2d/Editor2D.class:23.47"
+Count=3
 
 [Watches]
 Count=0

@@ -161,6 +161,9 @@ Public Sub RefreshPartUnit(Part As Integer, Optional Unit2D As GameObjectDataCla
   Dim PartUnitLimbY As Integer ' координаты крепления конечности
   Dim PartUnitLimbZ As Integer
   
+  Dim EvenA As Single
+  Dim EvenC As Single ' для определения чётности
+  
   If Part <= Unit.Parts.Max Then
     ' Если часть не выходит за колличество частей
     
@@ -186,14 +189,24 @@ Public Sub RefreshPartUnit(Part As Integer, Optional Unit2D As GameObjectDataCla
         Endif
         
         If Len(FilePicture) > 0 Then
-          ' Если есть картинка
+          ' Если есть картинка для нечётной конечности
           'e2d.GetPartUnitMorfidX(Unit2D, Part)
           
           ' Если есть картинка
+          EvenA = CSingle(Part) / 2 ' явное преобразование в Single. На всякий случай. Не стоит полагаться на автоматическое преобразование
+          EvenC = CInt(EvenA) ' получение целого значения.
+          ' Если целое и дробное значения одинаковы, значит конечность чётная
+          If (EvenA = EvenC) And (Part > 1) And (egodc.Strings[e2d.PropertyPartUnitMorfidFilePicture2] <> "") Then
+            ' Конечность чётная и есть для неё рисунок
+            FilePicture = egodc.Strings[e2d.PropertyPartUnitMorfidFilePicture2] ' получение имени файла изображения для чётной конечности
+          Else
+            ' конечность не чётная
+            ' Ничего не надо делать, всё сделанно
+          Endif
+          
           LimbsPictures[Part].Picture = Picture.Load(CurrentPath & "/" & FilePicture) ' установить требуемую картинку
           LimbsPictures[Part].X = PictureBody.X + PartUnitLimbX - egodc.IntegerValues[e2d.PropertyPartUnitMorfidX]
           LimbsPictures[Part].Y = PictureBody.Y + PartUnitLimbY - egodc.IntegerValues[e2d.PropertyPartUnitMorfidY]
-          'LimbsPictures[Part].Y = [e2d.PropertyPartUnitMorfidY] - egodc.IntegerValues[e2d.PropertyPartUnitMorfidX] ' Установка координат
           LimbsPictures[Part].Visible = True ' сделать видимым
         Endif
         

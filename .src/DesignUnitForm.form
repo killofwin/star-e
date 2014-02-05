@@ -4,37 +4,14 @@
   MoveScaled(0,0,107.1429,71.4286)
   Text = ("Редактор юнитов")
   Resizable = False
-  { PictureBody PictureBox
-    MoveScaled(34,0,36.5714,36.5714)
-    AutoResize = True
-    Border = Border.Plain
-  }
-  { PictureLimb1 PictureBox
-    MoveScaled(41,22,4.5714,4.5714)
-    Visible = False
-    AutoResize = True
-    Border = Border.Plain
-  }
   { PictureLimb2 PictureBox
     MoveScaled(41,28,4.5714,4.5714)
     Visible = False
     AutoResize = True
     Border = Border.Plain
   }
-  { PictureLimb3 PictureBox
-    MoveScaled(47,22,4.5714,4.5714)
-    Visible = False
-    AutoResize = True
-    Border = Border.Plain
-  }
-  { PictureLimb4 PictureBox
-    MoveScaled(47,28,4.5714,4.5714)
-    Visible = False
-    AutoResize = True
-    Border = Border.Plain
-  }
-  { PictureLimb5 PictureBox
-    MoveScaled(53,22,4.5714,4.5714)
+  { PictureLimb8 PictureBox
+    MoveScaled(59,28,4.5714,4.5714)
     Visible = False
     AutoResize = True
     Border = Border.Plain
@@ -45,15 +22,14 @@
     AutoResize = True
     Border = Border.Plain
   }
-  { PictureLimb7 PictureBox
-    MoveScaled(59,22,4.5714,4.5714)
+  { PictureLimb4 PictureBox
+    MoveScaled(47,28,4.5714,4.5714)
     Visible = False
     AutoResize = True
     Border = Border.Plain
   }
-  { PictureLimb8 PictureBox
-    MoveScaled(59,28,4.5714,4.5714)
-    Visible = False
+  { PictureBody PictureBox
+    MoveScaled(34,0,36.5714,36.5714)
     AutoResize = True
     Border = Border.Plain
   }
@@ -246,5 +222,29 @@
     MoveScaled(53,58,35,3)
     ToolTip = ("Нажатие этой кнопки модифицирует действие кнопок \"выбор\" и не присваивает новую конечность, а удаляет её заменяя на пустую.")
     Text = ("Удалять конечности")
+  }
+  { PictureLimb3 PictureBox
+    MoveScaled(47,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb5 PictureBox
+    MoveScaled(53,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb7 PictureBox
+    MoveScaled(59,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
+  }
+  { PictureLimb1 PictureBox
+    MoveScaled(41,22,4.5714,4.5714)
+    Visible = False
+    AutoResize = True
+    Border = Border.Plain
   }
 }
