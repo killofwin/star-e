@@ -2,7 +2,7 @@
 # Compiled with Gambas 3.1.1
 Title=Star Engineers 1
 Startup=FMain
-Version=0.0.1
+Version=0.0.3
 Component=gb.image
 Component=gb.qt4
 Component=gb.form
@@ -14,6 +14,7 @@ Description="alpha versuon morfid-editor"
 TabSize=2
 Translate=1
 Language=ru
+ExecPath=star-e.gambas
 SourcePath=/home/stas/Проекты/gambas 3
 Maintainer=PeKar
 Address=stas@GSV1
