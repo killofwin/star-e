@@ -167,10 +167,10 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
       
   r = True
   
-  If UMC < 1 Then
+  If UMC > 1 Then 
+    ' В начале было If UMC < 1 Then 
     ' У юнита есть части
     PartsGODC.Resize(UMC) 
-    
     For a = 0 To p
       ' Присвоение ссылок заранее для облегчения кодирования
       tp = UnitMorfid.Parts[a].OtherValues.FindID(Editor2dPartUnitMorfid)  ' ссылка на данные редактора морфидов
@@ -184,10 +184,9 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
       Endif
     Next
     
-    
-    
-    
+    'Print "ololo max " & Str(p)
     For a = 0 To p 'перебор частей
+      Print "ololo" & Str(a)
       If r = False Then Break ' досрочный выход если результат уже отрицательный 
       'Если проверка провалилась на раннем этапе, если она не провалилась, значит надо проверить каждую часть на валидность
       
@@ -199,11 +198,11 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
       
       If (SymB[a] Or SymD[a]) = False Then ' Конечность не является не блокированной и не дублированной
         ' Теперь надо проверить на своём ли она месте
-        If PartsGODC[a].IntegerValues[PropertyPartUnitTypeSymmetry] <> 2 Then
+        If PartsGODC[a].IntegerValues[PropertyPartUnitTypeSymmetry] = 2 Then
           ' Конечность должна быть чётной
           If Parity = False And a > 0 Then r = False ' Но конечность НЕчётная и не нулевая.
         Endif
-        If PartsGODC[a].IntegerValues[PropertyPartUnitTypeSymmetry] <> 1 Then
+        If PartsGODC[a].IntegerValues[PropertyPartUnitTypeSymmetry] = 1 Then
           ' Конечность должна быть НЕчётной
           If Parity = True And a > 0 Then r = False ' Но конечность чётная и не нулевая.
         Endif
@@ -373,7 +372,7 @@ End
 
 Public Function MaxBit(Number As Integer) As Integer ' функция возвращает длинну двоичного представления числа по крайней еденице.
   Dim r As Integer ' результат
-  r = Int(Log2(Number)) + 1  ' Log2(x) = Log(x) / Log(2) обрадовало что есть такая встроенная функция
+  If Number > 0 Then r = Int(Log2(Number)) + 1  ' Log2(x) = Log(x) / Log(2) обрадовало что есть такая встроенная функция
   ' формулу мне предоставили в треде http://iichan.hk/b/res/3007310.html
   Return r ' возврат значения
 End

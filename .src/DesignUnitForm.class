@@ -139,7 +139,7 @@ Public Sub RefreshUnit()
   ' проверка симметрии
   SymmetryBin = e2d.SymmetryMorfidTrue(Unit)
   If SymmetryBin <> True Then
-    LabelSym.Text = ("Юнит не валиден ") & Bin(SymmetryBin, 16)
+    LabelSym.Text = ("Ошибка симметрии ") & Bin(SymmetryBin, 8)
   Else
     LabelSym.Text = ("Юнит валиден")
   Endif

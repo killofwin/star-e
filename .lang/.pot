@@ -195,7 +195,7 @@ msgid "Загрузить"
 msgstr ""
 
 #: DesignUnitForm.class:142
-msgid "Юнит не валиден "
+msgid "Ошибка симметрии "
 msgstr ""
 
 #: DesignUnitForm.class:275
