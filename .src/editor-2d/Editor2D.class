@@ -123,7 +123,6 @@ End
 
 
 ' Проверки симетричности морфид.
-
 Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
   ' Функция возвращает True если Морфид собран в 2D редакторе симетрично. 
   ' Возвращает значение отличное от True если какая то часть не валидна, в битовой маске этого числа
@@ -149,6 +148,7 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
     
   Dim tp As Integer ' указатель в UnitMorfid.Parts[a].OtherValues
   Dim r As Integer ' результат
+  Dim r1 As Integer ' промежуточная переменная
   Dim Parity As Boolean ' чётность конечности
   
   Dim SymD As New Boolean[] ' проверить дублиование тех конечностей которые отмечены как True (дублирование)
@@ -184,9 +184,7 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
       Endif
     Next
     
-    'Print "ololo max " & Str(p)
     For a = 0 To p 'перебор частей
-      Print "ololo" & Str(a)
       If r = False Then Break ' досрочный выход если результат уже отрицательный 
       'Если проверка провалилась на раннем этапе, если она не провалилась, значит надо проверить каждую часть на валидность
       
@@ -227,6 +225,7 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
              bc = bc + 1 ' бит из маски который следует считать
              'А теперь считываем нужный бит из битовой маски
              If SymB[b] <> True Then
+               ' <> нужно что бы битовые маски разных конечностей не накладывались друг на друга (не пересекались)
                SymB[b] = BTst(PartsGODC[a].IntegerValues[PropertyPartUnitMorfidMaskB], bc) ' Необходимо пояснение, чуть сам не запутался:
              Endif
              ' Есть условие, оно необходимо что бы симметрия не оказалась отменена, она может только быть присвонной TRUE
@@ -277,7 +276,10 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
         If PartsGODC[a].Strings[PropertyPartUnitMorfidSymmetryString] <> "" Then
           ' Таки не равно, значит надо внечти в результат соответствующую маску
           ' Если что, нулевая конечность вне симметрии, но -1 надо всё равно сделать, потому что, потому что BSet считает первый бит нулевым
+          
+          Print r
           r = BSet(r, a - 1) ' собственно присвоение
+          
         Endif  
       Endif
       

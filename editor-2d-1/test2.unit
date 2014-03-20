@@ -79,25 +79,43 @@ begin universal-values
 name=
 id=0
 next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin other-values-part
+begin universal-values
 name=
-id=10001
-value-godc=
-begin game-object-data
-add-string=Тестовая голова
-add-string=
-add-string=
-add-string=
-add-string=pictures/test/test-model-1/head-test-model-1.png
-add-string= Обычное описание
-add-string=head-test-1
-add-integer=0
-add-integer=41
-add-integer=39
-add-integer=0
-add-integer=0
-add-integer=0
-add-integer=0
-end game-object-data
+id=0
+next value
+end universal-values
+end part-unit
+unit end-part
+unit begin-part
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin other-values-part
+begin universal-values
+name=
+id=0
 next value
 end universal-values
 end part-unit
@@ -157,26 +175,6 @@ begin universal-values
 name=
 id=0
 next value
-name=
-id=10001
-value-godc=
-begin game-object-data
-add-string=Тестовая симметричная лапа 1
-add-string=
-add-string=
-add-string=pictures/test/test-model-1/fut-test-model-1-2e.png
-add-string=pictures/test/test-model-1/fut-test-model-1-2.png
-add-string= Обычное описание
-add-string=fut-test-s1
-add-integer=1
-add-integer=35
-add-integer=9
-add-integer=0
-add-integer=1
-add-integer=3
-add-integer=0
-end game-object-data
-next value
 end universal-values
 end part-unit
 unit end-part
@@ -271,104 +269,6 @@ begin other-values-part
 begin universal-values
 name=
 id=0
-next value
-name=
-id=10001
-value-godc=
-begin game-object-data
-add-string=Тестовая лапа
-add-string=
-add-string=
-add-string=pictures/test/test-model-1/fut-test-model-1e.png
-add-string=pictures/test/test-model-1/fut-test-model-1.png
-add-string= Обычное описание
-add-string=fut-test-1
-add-integer=0
-add-integer=11
-add-integer=7
-add-integer=0
-add-integer=1
-add-integer=0
-add-integer=0
-end game-object-data
-next value
-end universal-values
-end part-unit
-unit end-part
-unit begin-part
-begin part-unit
-hp=0
-armor=0
-hp-armor=0
-armorK=0
-minimal-demage-armor=0
-chance-demage=0
-max-hp=0
-weight=0
-power=0
-begin other-values-part
-begin universal-values
-name=
-id=0
-next value
-name=
-id=10001
-value-godc=
-begin game-object-data
-add-string=Тестовая лапа
-add-string=
-add-string=
-add-string=pictures/test/test-model-1/fut-test-model-1e.png
-add-string=pictures/test/test-model-1/fut-test-model-1.png
-add-string= Обычное описание
-add-string=fut-test-1
-add-integer=0
-add-integer=11
-add-integer=7
-add-integer=0
-add-integer=1
-add-integer=0
-add-integer=0
-end game-object-data
-next value
-end universal-values
-end part-unit
-unit end-part
-unit begin-part
-begin part-unit
-hp=0
-armor=0
-hp-armor=0
-armorK=0
-minimal-demage-armor=0
-chance-demage=0
-max-hp=0
-weight=0
-power=0
-begin other-values-part
-begin universal-values
-name=
-id=0
-next value
-name=
-id=10001
-value-godc=
-begin game-object-data
-add-string=Тестовый хвост
-add-string=
-add-string=
-add-string=
-add-string=pictures/test/test-model-1/tail-test-model-1.png
-add-string= Обычное описание
-add-string=tail-test-1
-add-integer=0
-add-integer=7
-add-integer=14
-add-integer=0
-add-integer=9
-add-integer=0
-add-integer=0
-end game-object-data
 next value
 end universal-values
 end part-unit
