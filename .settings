@@ -11,7 +11,7 @@ Geometry=[0,0,210,210]
 File[1]=".src/DesignUnitForm.form"
 File[2]=".src/DesignUnitForm.class:141.39"
 Active=3
-File[3]=".src/editor-2d/Editor2D.class:229.18"
+File[3]=".src/editor-2d/Editor2D.class:269.10"
 Count=3
 
 [Watches]

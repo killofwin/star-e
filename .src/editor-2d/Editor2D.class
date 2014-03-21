@@ -266,6 +266,7 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
         If PartsGODC[a].Strings[PropertyPartUnitMorfidSymmetryString] <> SymStrings[a] Then
           ' Таки не равно, значит надо внечти в результат соответствующую маску
           ' Если что, нулевая конечность вне симметрии, но -1 надо всё равно сделать, потому что BSet считает первый бит нулевым
+          If r = True Then r = False ' К сожалению функция BSet не работает если первый аргумент равен True или -1
           r = BSet(r, a - 1) ' собственно присвоение
         Endif
       Endif
@@ -276,8 +277,7 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
         If PartsGODC[a].Strings[PropertyPartUnitMorfidSymmetryString] <> "" Then
           ' Таки не равно, значит надо внечти в результат соответствующую маску
           ' Если что, нулевая конечность вне симметрии, но -1 надо всё равно сделать, потому что, потому что BSet считает первый бит нулевым
-          
-          Print r
+          If r = True Then r = False ' К сожалению функция BSet не работает если первый аргумент равен True или -1
           r = BSet(r, a - 1) ' собственно присвоение
           
         Endif  
