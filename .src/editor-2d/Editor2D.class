@@ -283,9 +283,29 @@ Public Function SymmetryMorfidTrue(UnitMorfid As UnitClass) As Integer
         Endif  
       Endif
       
+      'Проверка в подходящих ли слотах находяться конечности
+      If a = 0 Then
+        ' проверка слота головы
+        If PartsGODC[a].IntegerValues[PropertyPartUnitMorfidAppointment] <> 0 And PartsGODC[a].Strings[PropertyUnitMorfidName] <> "" Then
+          If r = True Then r = False ' К сожалению функция BSet не работает если первый аргумент равен True или -1
+          r = BSet(r, a) ' собственно присвоение
+        End If  
+      Endif
+      If a = 9 Then
+        ' проверка слота хвоста
+        If PartsGODC[a].IntegerValues[PropertyPartUnitMorfidAppointment] <> 9 And PartsGODC[a].Strings[PropertyUnitMorfidName] <> "" Then
+          If r = True Then r = False ' К сожалению функция BSet не работает если первый аргумент равен True или -1
+          r = BSet(r, a) ' собственно присвоение
+        End If  
+      Endif
+      If a > 0 And a < 9 Then
+        ' проверка слотов лап 
+        If PartsGODC[a].IntegerValues[PropertyPartUnitMorfidAppointment] <> 1 And PartsGODC[a].Strings[PropertyUnitMorfidName] <> "" Then
+          If r = True Then r = False ' К сожалению функция BSet не работает если первый аргумент равен True или -1
+          r = BSet(r, a) ' собственно присвоение
+        End If  
+      Endif
       
-      
-  
     Next 'перебор частей
   
   Endif
@@ -326,6 +346,7 @@ Public Function GetSymmetryDuplication(Part As PartUnitClass) As Boolean[]
     Endif
     
     ' Другие типы юнитов 2D редактора
+    ' For Plugins
     
   Endif
   
@@ -364,6 +385,7 @@ Public Function GetSymmetryBlocking(Part As PartUnitClass) As Boolean[]
       Next
     Endif
     
+    ' For Plugins
     ' Другие типы юнитов 2D редактора
     
   Endif

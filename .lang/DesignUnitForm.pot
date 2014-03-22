@@ -190,23 +190,35 @@ msgstr ""
 msgid "Ошибка симметрии "
 msgstr ""
 
-#: DesignUnitForm.class:275
+#: DesignUnitForm.class:217
+msgid "Голова"
+msgstr ""
+
+#: DesignUnitForm.class:218
+msgid "Хвост"
+msgstr ""
+
+#: DesignUnitForm.class:219
+msgid "Лапа "
+msgstr ""
+
+#: DesignUnitForm.class:279
 msgid "Загрузка шаблона морфида"
 msgstr ""
 
-#: DesignUnitForm.class:323
+#: DesignUnitForm.class:327
 msgid "Сохранить морфида под именем"
 msgstr ""
 
-#: DesignUnitForm.class:367
+#: DesignUnitForm.class:379
 msgid "Выбор части морфида"
 msgstr ""
 
-#: DesignUnitForm.class:367
+#: DesignUnitForm.class:379
 msgid "добавить эту часть морфиду"
 msgstr ""
 
-#: DesignUnitForm.class:367
+#: DesignUnitForm.class:379
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 

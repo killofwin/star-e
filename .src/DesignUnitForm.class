@@ -213,7 +213,11 @@ Public Sub RefreshPartUnit(Part As Integer, Optional Unit2D As GameObjectDataCla
       Endif
       If o = -1 Then
         ' описание конечности не найдено. Присвоить пустые значения элементам отображения
-        LimbsTexts[Part].Text = ""
+        
+        If Part = 0 Then LimbsTexts[Part].Text = ("Голова")
+        If Part = 9 Then LimbsTexts[Part].Text = ("Хвост")
+        If Part < 9 And Part > 0 Then LimbsTexts[Part].Text = ("Лапа ") & Str(Part)
+        
         LimbsPictures[Part].Visible = False
       Endif
       
@@ -361,6 +365,14 @@ Public Sub EventLimbButton(n As Integer)
   
   Dim a As Integer ' счётчик цикла
   Dim m As Integer ' ограничитель цикла
+  
+  Dim e2dProperty As GameObjectDataClass ' ссылка на информацию 2d редактора морфид нужной конечности
+  Dim LinkProperty As Integer ' перменная для поиска нужных данных в части юнита
+  Dim MaskD As Boolean[] ' Массив маски дублирования
+  Dim MaskB As Boolean[] ' Массив маски блокирования
+  Dim da As Integer
+  Dim ba As Integer ' счётчики цикла для соблюдения симметрии дублирования и блокирования.
+  Dim ma As Integer ' ограничитель цикла
     
   If ToggleButtonDeleteLimb.Value = False Then
     ' Кнопка удаления не нажата
@@ -385,16 +397,43 @@ Public Sub EventLimbButton(n As Integer)
           Unit.Parts[a] = New PartUnitClass ' присваиваем пустышки
         Next
       Endif
-    
+      
       Unit.Parts[n] = LoadPart ' присовить загруженную часть указанной конечности 
+      'Надо теперь соблюсти симметрию и дополнить конечность необходимыми симметричными, а заблокированные удалить.
+      LinkProperty = Unit.Parts[n].OtherValues.FindID(e2d.Editor2dPartUnitMorfid)
+      If LinkProperty > -1 Then
+        'конечность найдена
+        'e2dProperty = Unit.Parts[n].OtherValues.Values[LinkProperty] ' присвоить ссылку на данные редактора
+        'Видимо не нужно, функции и сами найти могут что надо
+        MaskD = e2d.GetSymmetryDuplication(Unit.Parts[n])
+        MaskB = e2d.GetSymmetryBlocking(Unit.Parts[n])
+        'e2dProperty.IntegerValues[e2d.PropertyPartUnitMorfidMaskD]
+        ma = Unit.Parts.Max
+        da = 0
+        For ba = n + 1 To ma
+          'перебор конечностей симметрии 
+         If MaskD[da] = True And MaskB[da] = False Then
+            'Дублирование есть, а блокирования нет, значит продублировать часть
+            Unit.Parts[ba] = LoadPart ' присовить загруженную часть дублированной конечности 
+          Endif
+          If MaskB[da] = True Then
+            ' Конечность заблокированна, присвоить пустую
+            Unit.Parts[ba] = Null ' очистить сначала
+            Unit.Parts[ba] = New PartUnitClass
+            Unit.Parts[ba].OtherValues.AddValueID(e2d.Editor2dPartUnitMorfid, e2d.NewBlankGameObjectData(e2d.Editor2dPartUnitMorfid), "") 
+          Endif
+          da = da + 1 ' первая по счёту от искомой
+        Next
+        
+      Endif
+      
       UnitChanged = True ' Юнит изменился
       LabelChandedUpdate()
       ' Теперь надо проверить подходит ли она в этот слот
       ' То есть устроить проверку валидности
       ' Проверка валидности
-      
-      
       ' Реализую
+      ' Уже не надо, редактор ненавязчиво информирует о невалидности конечности
        
     Endif
     
@@ -403,7 +442,6 @@ Public Sub EventLimbButton(n As Integer)
       Unit.Parts[n] = New PartUnitClass
       'e2d.NewBlankGameObjectData(e2d.Editor2dPartUnitMorfid)
       'REM
-      Print n
       UnitChanged = True ' Юнит изменился
       LabelChandedUpdate()
     
