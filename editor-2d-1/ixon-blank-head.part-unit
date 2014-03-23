@@ -1,0 +1,64 @@
+'= Это комментарий
+'= Данный формат файлов описывает часть юнита
+begin part-unit
+hp=0
+armor=0
+hp-armor=0
+armorK=0
+minimal-demage-armor=0
+chance-demage=0
+max-hp=0
+weight=0
+power=0
+begin other-values-part
+begin universal-values
+name=Балластное свойство
+id=0
+next value
+name=
+id=10001
+value-godc=
+begin game-object-data
+
+'= Здесь название юнита для 2D редактора морфид
+add-string=Тестовая голова ixon 1
+
+'= Поля зарезервированны
+add-string=
+add-string=
+add-string=
+
+'= Имя файла с картинкой
+add-string=pictures/test/ixon/head-ixon-model-1.png
+
+'= Описание юнита
+add-string= Обычное описание
+
+'= Строка проверки дублирования
+add-string=head-test-1
+
+'= Тип необходимой симетрии (0-нет, 1- с нечётного, 2 - с чётного)
+add-integer=0
+
+'= Координата X в 2D редакторе
+add-integer=48
+
+'= Координата Y в 2D редакторе
+add-integer=34
+
+'= Координата Z в 2D редакторе, на всякий случай, вдруг станет 3D редактором
+add-integer=0
+
+'= Это голова, значение 0 (0 голова, 1 лапа, 9 хвост)
+add-integer=0
+
+'=Маска дублирования
+add-integer=0
+
+'=Маска блокирования
+add-integer=0
+
+end game-object-data=
+next value
+end universal-values
+end part-unit

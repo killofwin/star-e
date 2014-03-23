@@ -373,6 +373,8 @@ Public Sub EventLimbButton(n As Integer)
   Dim da As Integer
   Dim ba As Integer ' счётчики цикла для соблюдения симметрии дублирования и блокирования.
   Dim ma As Integer ' ограничитель цикла
+  
+  Dim 
     
   If ToggleButtonDeleteLimb.Value = False Then
     ' Кнопка удаления не нажата
@@ -405,8 +407,12 @@ Public Sub EventLimbButton(n As Integer)
         'конечность найдена
         'e2dProperty = Unit.Parts[n].OtherValues.Values[LinkProperty] ' присвоить ссылку на данные редактора
         'Видимо не нужно, функции и сами найти могут что надо
-        MaskD = e2d.GetSymmetryDuplication(Unit.Parts[n])
-        MaskB = e2d.GetSymmetryBlocking(Unit.Parts[n])
+        '
+        'MaskD = e2d.GetSymmetryDuplication(Unit.Parts[n])
+        'MaskB = e2d.GetSymmetryBlocking(Unit.Parts[n])
+        ' Эти две функции класса были удаленны. Они будут заменены более простыми в другом специальном классе.
+        'MaskD
+        
         'e2dProperty.IntegerValues[e2d.PropertyPartUnitMorfidMaskD]
         ma = Unit.Parts.Max
         da = 0

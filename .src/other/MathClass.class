@@ -1,0 +1,18 @@
+' Gambas class file
+
+' Данный класс содержит всевозможные функции нужные для сложны математических операций.
+
+Public Const MaxArrayNumberInteger As Integer = 31
+
+Public Function GetBitsNumberInteger(Number As Integer) As Boolean[]
+  Dim r As New Boolean[MaxArrayNumberInteger] ' 0--31 = 32
+  Dim a As Integer 'счётчик цикла
+  Dim m As Integer 'ограничитель цикла
+  
+  m = r.Max
+  For a = 1 To m
+    r[a] = BTst(Number, a) ' считываем маску дублирования по битам из переданной части
+  Next
+  
+End
+
