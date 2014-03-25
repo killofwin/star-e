@@ -9,10 +9,9 @@ Geometry=[0,0,210,210]
 
 [OpenFile]
 File[1]=".src/DesignUnitForm.form"
-File[2]=".src/DesignUnitForm.class:376.6"
-Active=3
-File[3]=".src/other/MathClass.class:15.2"
-Count=3
+Active=2
+File[2]=".src/DesignUnitForm.class:417.8"
+Count=2
 
 [Watches]
 Count=0

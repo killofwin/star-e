@@ -2,10 +2,10 @@
 
 ' Данный класс содержит всевозможные функции нужные для сложны математических операций.
 
-Public Const MaxArrayNumberInteger As Integer = 31
+Public Const MaxArrayNumberInteger As Integer = 32 '0--31 = 32 Число типа Integer содержит 31 бит числовых значений и 1 бит знака
 
 Public Function GetBitsNumberInteger(Number As Integer) As Boolean[]
-  Dim r As New Boolean[MaxArrayNumberInteger] ' 0--31 = 32
+  Dim r As New Boolean[MaxArrayNumberInteger] 
   Dim a As Integer 'счётчик цикла
   Dim m As Integer 'ограничитель цикла
   
@@ -13,6 +13,7 @@ Public Function GetBitsNumberInteger(Number As Integer) As Boolean[]
   For a = 1 To m
     r[a] = BTst(Number, a) ' считываем маску дублирования по битам из переданной части
   Next
+  Return r
   
 End
 
