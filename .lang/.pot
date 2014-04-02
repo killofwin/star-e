@@ -18,7 +18,7 @@ msgstr ""
 msgid "alpha versuon morfid-editor"
 msgstr ""
 
-#: DesignUnitForm.form:55
+#: DesignForm.form:7 DesignUnitForm.form:55
 msgid "Редактор юнитов"
 msgstr ""
 
