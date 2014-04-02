@@ -218,15 +218,15 @@ msgstr ""
 msgid "Сохранить морфида под именем"
 msgstr ""
 
-#: DesignUnitForm.class:379
+#: DesignUnitForm.class:381
 msgid "Выбор части морфида"
 msgstr ""
 
-#: DesignUnitForm.class:379
+#: DesignUnitForm.class:381
 msgid "добавить эту часть морфиду"
 msgstr ""
 
-#: DesignUnitForm.class:379
+#: DesignUnitForm.class:381
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 

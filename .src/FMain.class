@@ -27,51 +27,8 @@ End
 
 
 Public Sub PictureBoxLogo_MouseDown()
-
- Dim h As Single
- Dim hh As Single
- Dim a As Integer
- Dim n As Integer
- Dim v As Variant
- Dim m As Integer
- Dim s As New GameObjectDataClass 
- Dim s1 As New GameObjectDataClass
- 
- Dim pUnit As New PartUnitClass
- Dim Unit As New UnitClass 
- Dim rArray As String[]
- 
- Unit.Formation = 1
- Unit.Speed = 10
- Unit.TypeUnit = "тестовый юнит"
- Unit.OtherValues.AddValueID(1000, 1488, "дополнительное свойство юнита")
- Unit.OtherValues.AddValueID(1001, "14/88", "ещё одно дополнительное свойство юнита") 
- Unit.OtherValues.AddValueID(1001, 14.88, "дополнительное свойство юнита с плавающей точкой") 
- 
- s.IntegerValues.Add(14)
- s.IntegerValues.Add(88)
- s.SingleValues.Add(3.1416)
- s.SingleValues.Add(13.13)
- s.Strings.Add("это сложное свойство имеющее набор из 3 массивов, целочисленного, дробного и строчного")
- s.Strings.Add("Строка сложного внутреннего свойства")
- Unit.OtherValues.AddValueID(5, s, "дополнительное сложное свойство имеющее внутри 3 массивас разными типами данных") 
- 
- Unit.Parts.Add(pUnit)
- pUnit = Null
- pUnit = New PartUnitClass
- Unit.Parts.Add(pUnit)
- 
- Unit.Parts[0].OtherValues.AddValueName("дополнительное свойство нулевой дополнительной части объекта", "строка")
- Unit.Parts[1].OtherValues.AddValueName("дополнительное свойство первой дополнительной части объекта", 100500)
- Unit.Parts[1].HP = 1000
- 
- rArray = Unit.SaveClass()
- Unit.LoadClass(rArray)
- 
- m = rArray.Max
- For a = 0 To m
-   Print rArray[a]
- Next
+  
+   
 End
 
 Private Function GetS(n As Integer) As Integer
