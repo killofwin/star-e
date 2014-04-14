@@ -8,10 +8,10 @@ Count=0
 Geometry=[0,0,210,210]
 
 [OpenFile]
-File[1]=".src/game-server/GameMetaServerClass.class:14.0"
+File[1]=".src/game-server/GameMetaServerClass.class:5.20"
 Active=2
-File[2]=".src/game-server/GameServerClass.class:9.0"
-File[3]=".src/game-server/GameLocationClass.class:6.0"
+File[2]=".src/game-server/GameServerClass.class:18.1"
+File[3]=".src/game-server/GameNetServerClass.class:10.0"
 Count=3
 
 [Watches]

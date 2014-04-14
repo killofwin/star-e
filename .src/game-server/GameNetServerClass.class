@@ -1,0 +1,10 @@
+' Gambas class file
+
+Inherits GameServerClass
+
+'Специальный класс для связи с игровыми серверами по сети.
+
+Public Sub NextTicGame(Optional t As Integer = 1)
+  ' Функция заглушка.
+End
+
