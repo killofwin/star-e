@@ -1,0 +1,90 @@
+' Gambas class file
+
+Public Const PX As Integer = 200
+Public Const PY As Integer = 200
+
+Public Ps As New Integer[PX, PY]
+Public PsD As New Integer[][] ' массив одномерных массивов Integer, замена массиву Ps
+
+
+Public Sub Form_Open()
+  Dim a As Integer
+
+  PsD.Resize(PX + 1) ' изменение X
+  For a = 0 To PsD.Max
+    PsD[a] = New Integer[] ' Создание массива
+    PsD[a].Resize(PY + 1) ' Изменение Y
+  Next
+  
+  For a = 1 To 100
+    Ps[50, 20 + a] = 1
+  Next  
+  For a = 1 To 100
+    PsD[50][20 + a] = 1 ' Альтернатива Ps[50, 20 + a] = 1
+  Next
+
+End
+
+Public Sub RefrashXY(ax As Integer, ay As Integer)
+  DrawA.Cached = True
+  Draw.Begin(DrawA) ' начинаем рисовать
+  ' If Ps[ax, ay] > 0 Then
+  '   DrawA.Foreground = PS[ax, ay]
+  '   Draw.Point(ax, ay)
+  ' End If  
+  If PsD[ax][ay] > 0 Then
+    DrawA.Foreground = PsD[ax][ay]
+    Draw.Point(ax, ay)
+  Endif
+  Draw.End ' заканчиваем рисовать
+End
+
+
+
+Public Sub RefrashAll()
+  Dim ax As Integer
+  Dim ay As Integer
+  Dim PeX As Integer
+  Dim PeY As Integer
+  
+  PeX = PX - 1
+  PeY = PY - 1
+  
+  DrawA.Cached = True
+  Draw.Begin(DrawA) ' начинаем рисовать
+  For ax = 0 To PeX
+    For ay = 0 To PeY
+      If PsD[ax][ay] > 0 Then
+        DrawA.Foreground = PsD[ax][ay]
+        Draw.Point(ax, ay)
+      End If  
+    Next
+  Next
+  
+  Draw.End ' заканчиваем рисовать
+End
+
+
+Public Sub DrawA_Draw()
+  'RefrashAll()
+
+End
+
+Public Sub DrawA_MouseDown()
+  RefrashAll()
+End
+
+Public Sub TestButton_Click()
+  DrawA.Cached = True
+  Draw.Begin(DrawA)
+  Draw.Line(1, 100, 100, 10)
+  Draw.End
+End
+
+Public Function FindTrack(Matrix2D As Integer[][]) As Integer[]
+  ' Фунция ищёт маршрут из точки 110*110 в точку 10*10
+  ' И отображает графически процесс поиска
+  
+  
+  
+End

@@ -38,4 +38,7 @@
     Font = Font["a_FuturaRoundDemi,-1"]
     Text = ("Тестовая проверка функций и кусков кода")
   }
+  { HttpClientI #HttpClient
+    #MoveScaled(15,30)
+  }
 }

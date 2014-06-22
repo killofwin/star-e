@@ -230,31 +230,31 @@ msgstr ""
 msgid "Отмена, ничего не выбираю"
 msgstr ""
 
-#: FMain.form:16
+#: FMain.form:17
 msgid "Звёздные инжинеры 1"
 msgstr ""
 
-#: FMain.form:27
+#: FMain.form:28
 msgid "Звёздные инженеры 1"
 msgstr ""
 
-#: FMain.form:33
+#: FMain.form:34
 msgid "Первичная эволюция"
 msgstr ""
 
-#: FMain.form:38
+#: FMain.form:39
 msgid "Старт одиночной демонстрационной игры"
 msgstr ""
 
-#: FMain.form:43
+#: FMain.form:44
 msgid "Выход из игры"
 msgstr ""
 
-#: FMain.form:49
+#: FMain.form:50
 msgid "Старт редактора юнитов"
 msgstr ""
 
-#: FMain.form:55
+#: FMain.form:56
 msgid "Тестовая проверка функций и кусков кода"
 msgstr ""
 

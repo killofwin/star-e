@@ -1,0 +1,14 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,68,47)
+  { DrawA DrawingArea
+    MoveScaled(6,2,30,30)
+    Background = &HFFFFFF&
+    Foreground = &H000000&
+    Border = Border.Raised
+  }
+  { TestButton Button
+    MoveScaled(44,11,18,10)
+  }
+}

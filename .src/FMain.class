@@ -43,45 +43,16 @@ End
 
 
 Public Sub TestButton_Click()
-  Dim a As Integer
-  Dim a2 As Integer
+ 
+ Dim f As New TreckForm ' форма для испытания метода вычисления пути на стратегической карте
+ 
+ f.Show
+ f.SetFocus
   
-  Dim TimeH As Float
-  Dim TimeE As Float
-  Dim r As Float
-  
-  Dim i As Integer
-  Dim b As Boolean
-  Dim i2 As Integer
-  Dim f As Integer
-  Dim f2 As Float
-  
-  
-  TimeH = Timer ' время начала теста
-  For a = 1 To 1000000
-    For a2 = 1 To 15
-      ' используем встроенную функцию Gambas runtime
-      b = BTst(a, a2 - 1)
-    Next  
-  Next
-  TimeE = Timer
-  r = TimeE - TimeH ' вычисление разницы времени
-  Print "время с использованием встроеных функций  " & Str(r)
-  
-  
-  
-  TimeH = Timer ' время начала теста
-  For a = 1 To 1000000
-    For f2 = 1 To 15
-      'i2 = (2 ^ (a2 - 1)) ' необходимо из за ошибки несоответсвия типов
-      b = a And CInteger(2 ^ (a2 - 1))
-    Next  
-  Next
-  TimeE = Timer
-  r = TimeE - TimeH ' вычисление разницы времени
-  Print "время с использованием уравнения в коде   " & Str(r)
-  
-    
+End
 
+Public Sub HttpClientI_Read()
+
+  
 
 End
