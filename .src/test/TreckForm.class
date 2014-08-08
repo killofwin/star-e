@@ -6,6 +6,8 @@ Public Const PY As Integer = 200
 Public Ps As New Integer[PX, PY]
 Public PsD As New Integer[][] ' массив одномерных массивов Integer, замена массиву Ps
 
+Public AP As New Integer[]
+
 
 Public Sub Form_Open()
   Dim a As Integer
@@ -75,10 +77,24 @@ Public Sub DrawA_MouseDown()
 End
 
 Public Sub TestButton_Click()
-  DrawA.Cached = True
-  Draw.Begin(DrawA)
-  Draw.Line(1, 100, 100, 10)
-  Draw.End
+  'Dim Ar As New ArrayDynamicMatrix2dVariant
+  Dim i As New Integer[]
+  Dim Q As New ArrayDynamicDmVariant
+  'Print ar[1, 1]
+  'Q.Extra(128, "ololo", 0.3)
+  i.Add(10)
+  i.Add(10)
+  i.Add(10)
+  q.SetDimensionNotSave(i)
+  'Print q.ArrayOne.Count
+  
+  i.Clear
+  i.Add(2)
+  i.Add(3)
+  i.Add(8)
+  
+  q.PutItem(True, i)
+  Print q.GetItem(i)
 End
 
 Public Function FindTrack(Matrix2D As Integer[][]) As Integer[]

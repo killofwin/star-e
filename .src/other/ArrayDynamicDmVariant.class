@@ -1,0 +1,144 @@
+' Gambas class file
+
+' Класс многомерного динамического массива с динамическим числом размерностей.
+
+Public ArrayOne As New Variant[] ' динамический массив
+
+Private Dimension As New Integer[] ' Размерность массива
+Private CountDimensions As Integer ' Колличество размерностей массива
+Private MaxDimensions As Integer ' MaxDimensions = CountDimensions - 1
+
+Private SymDimensionArray As New Integer[] ' Занимаемые ячейкой каждой размерностью диапазоны в одномерном массиве
+
+
+Public Function CountAllDimension() As Integer[]
+  'Возвратить размер массива в виде массива значений
+  Return Dimension.Copy() ' Возвратить копию, для безопасности
+End
+Public Sub SetDimensionNotSave(DimensionArray As Integer[])
+  'Изменить размер массива без соранения данных
+  Dim c As Integer ' колличество измерений
+  Dim m As Integer
+  Dim a As Integer ' счётчик измерений
+  Dim p As Integer ' Колличество занимаемых ячеек
+  c = DimensionArray.Count
+  m = DimensionArray.Max
+  If c > 0 Then
+    For a = 0 To m
+      If a = 0 Then p = DimensionArray[a] ' первое значение
+      'If a > 0 Then p = p + (p * DimensionArray[a]) ' последующие значения
+      If a > 0 Then p = (p * DimensionArray[a]) ' последующие значения
+      'Print p ' отладочная операция
+    Next
+  Endif
+  ArrayOne.Resize(p) ' изменение размера
+  SymDimensionArray.Resize(c) 'колличество ячеек каждой размерности
+  If c > 1 Then
+    ' массив не одномерный 
+    SymDimensionArray[m] = 1 ' Элемент последнего измерения занимает 1 ячейку
+    For a = m - 1 To 0 Step -1
+      'обратный цикл
+      'Подсчитывает колличество ячеек каждой размерности
+      SymDimensionArray[a] = SymDimensionArray[a + 1] * DimensionArray[a + 1] ' умножить колличество ячеек занимаемых предыдущим измерением на колличество яччек в предыдущем измерении
+      ' Предположим есть массив 5*3*10 = x*y*z   x=5 y=3 z=10
+      ' Тогда 1 = размер ячейки измерения dz = 1
+      ' 1*10 = размер ячейки измерения dy = z * dz
+      ' 10*3 = размер ячейки измерения dx = y * dy
+    Next
+  End If  
+  CountDimensions = c ' Колличество размерностей массива
+  MaxDimensions = c - 1
+  
+  Dimension.Resize(DimensionArray.Count)
+  For a = 0 To DimensionArray.Max
+    Dimension[a] = DimensionArray[a]
+  Next
+  'Dimension = DimensionArray.Copy ' размерности
+End
+Private Sub SetDimension(DimensionArray As Integer[])
+  ' Устанавливает нужную размерность одномерного массива под заданные размеры
+  Print "Не реализованно"
+  Stop
+End
+
+Public Function GetItem(ItemIndex As Integer[]) As Variant
+  ' Функция возвращает искомое значение используя в качестве  указателя индексы из массива
+  Dim p As Integer ' указатель на нужный элемент
+  Dim a As Integer ' счётчик, не знаю буду ли применять 
+  If ItemIndex.Count < CountDimensions Then
+    ' Колличество ячеек в массиве запроса меньше чем колличество измерений массива
+  Else
+    ' Запрос к корректному колличеству измерений
+    For a = 0 To MaxDimensions
+      'перебор измерений
+      'If ItemIndex[a] > Dimension[a - 1] Then  ' Max = Count -1 'Здесь надо сгенерировать ошибку
+      p = p + ItemIndex[a] * SymDimensionArray[a] ' Умножить индекс сложной ячейки на колличество одинарных ячеек которые она занимает
+    Next
+        
+  Endif
+  Return ArrayOne[p] ' Собственно возврат значения
+  
+End
+
+Public Sub PutItem(Value As Variant, ItemIndex As Integer[])
+  ' Функция возвращает искомое значение используя в качестве  указателя индексы из массива
+  Dim p As Integer ' указатель на нужный элемент
+  Dim a As Integer ' счётчик, не знаю буду ли применять 
+  If ItemIndex.Count < CountDimensions Then
+    ' Колличество ячеек в массиве запроса меньше чем колличество измерений массива
+  Else
+    ' Запрос к корректному колличеству измерений
+    For a = 0 To MaxDimensions
+      'перебор измерений
+      'If ItemIndex[a] > Dimension[a - 1] Then  ' Max = Count -1 'Здесь надо сгенерировать ошибку
+      'Print "ItemIndex(a) = " & Str(ItemIndex[a]);
+      'Print "    SymDimensionArray(a) = " & Str(SymDimensionArray[a]);
+      '
+      p = p + ItemIndex[a] * SymDimensionArray[a] ' Умножить индекс сложной ячейки на колличество одинарных ячеек которые она занимает
+      'Print "    p= " & Str(p);
+      'Print ""
+    Next
+        
+  Endif
+  ArrayOne[p] = Value ' Присвление значения
+  
+End
+
+Public Function _get(...) As Variant
+  'Функция обёртка для обращения посредством []
+  Dim a As Integer
+  Dim m As Integer
+  Dim r As Variant
+  Dim PS As New Integer[]
+  m = Param.Max
+  PS.Resize(Param.Count)
+  For a = 0 To m
+    PS[a] = Param[a]
+  Next
+  r = GetItem(PS)
+  Return r 
+End
+Public Sub _put(Value As Variant, ...) 
+  'Функция обёртка для присвоения посредством []
+  Dim a As Integer
+  Dim m As Integer
+  Dim r As Variant
+  Dim PS As New Integer[]
+  m = Param.Max
+  PS.Resize(Param.Count)
+  For a = 0 To m
+    PS[a] = Param[a]
+  Next
+  PutItem(Value, PS)
+End
+
+
+
+Public Function Extra(...)
+  Dim a As Integer
+  Print Param.Count
+  For a = 0 To Param.Max
+    Print Param[a]
+  Next
+End
+

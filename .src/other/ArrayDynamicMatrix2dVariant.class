@@ -1,0 +1,62 @@
+' Gambas class file
+
+' Класс реализующий двумерный динамический массив
+Private Array2D As New Variant[][] ' Хранилище данных
+
+
+
+Public Sub _get(x As Integer, y As Integer) As Variant
+  'Возврат значения
+  Return Array2D[x][y]
+End
+Public Sub _put(Value As Variant, x As Integer, y As Integer)
+  'Присвоение значения
+  Array2D[x][y] = Value
+End
+
+Public Sub ResizeX(x As Integer)
+  'Функция изменяет размер массива по измерению X
+  Dim a As Integer
+  Dim m As Integer
+  Dim c As Integer
+  Dim m1 As Integer
+  Dim xm As Integer ' новый максимальный индекс
+  Dim AddValueToArray As Variant[] ' новая добавляемая строка
+  m = Array2D.Max
+  c = Array2D.Count
+  Array2D.Resize(x) ' изменение размера по оси X
+  If x > c Then
+    'в массив добавлены новые элементы
+    m1 = m + 1 ' для того что бы не писать в условии цикла a = m + 1
+    xm = x - 1 ' или xm = Array2D.Max
+    For a = m1 To xm
+      ' Используем допущение что элементы в массиве пронумерованны целыми натуральными положительными числам и 0
+      AddValueToArray = New Variant[]
+      AddValueToArray.Resize(Array2D[0].Count) ' Заменить на считывание CountY
+      Array2D[a] = AddValueToArray ' добавление нового массива 
+    Next
+  Endif
+  
+  Array2D.Resize(x)
+End
+Public Sub ResizeY(y As Integer)
+  'Функция изменяет размер массива по измерению Y
+  Dim a As Integer
+  Dim m As Integer
+  m = Array2D.Max
+  If Array2D.Count > 0 Then
+    'Размер X определён
+    For a = 0 To m
+      Array2D[a].Resize(y) 'перебор строк массива
+    Next
+  Endif
+  
+  
+End
+
+
+Public Sub _new()
+  'Создание обънкта и инициализация
+  
+  
+End
